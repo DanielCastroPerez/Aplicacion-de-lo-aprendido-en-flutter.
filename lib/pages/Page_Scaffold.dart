@@ -25,18 +25,18 @@ class Page_Scaffold extends StatelessWidget {
           children: <Widget>[
             // CONTENEDOR PARA LA IMAGEN
             Container(
+              margin: EdgeInsets.only(bottom: 20), // SEPARO LA IMAGEN DE LO DEMÁS bottom ESPACIO ABAJO DE LA IMAGEN
               child: Image.asset(
                 "assets/Scaffold.jpg", // CARGO UNA IMAGEN DESDE LOS ASSETS
-                fit: BoxFit.fill, // LA AJUSTO AL CONTENEDOR
+              fit: BoxFit.fill, // LA AJUSTO AL CONTENEDOR CON BoxFit
               ),
-              margin: EdgeInsets.only(bottom: 20), // SEPARO LA IMAGEN DE LO DEMÁS
             ),
 
             // CONTENEDOR PARA LA EXPLICACIÓN
             Container(
               padding: EdgeInsets.all(10), // ESPACIADO INTERIOR
-              decoration: BoxDecoration(
-                color: Colors.grey[200], // FONDO GRIS CLARO
+              decoration: BoxDecoration(//SOLO ES DECORAR EL CONTENEDOR 
+                color: Colors.grey[200], // FONDO DEL CONTEINER PARA QUE SE VEA PRO
                 borderRadius: BorderRadius.circular(8), // BORDES REDONDEADOS
               ),
               child: Text(
@@ -54,7 +54,7 @@ como la barra de aplicaciones, el cuerpo principal, la barra de navegación infe
             Container(
               padding: EdgeInsets.all(10), // ESPACIADO INTERIOR
               decoration: BoxDecoration(
-                color: Colors.black87, // FONDO NEGRO OSCURO PARA SIMULAR CONSOLA
+                color: Colors.black87,
                 borderRadius: BorderRadius.circular(8), // BORDES REDONDEADOS
               ),
               child: Text(
@@ -67,8 +67,8 @@ como la barra de aplicaciones, el cuerpo principal, la barra de navegación infe
   ),
 );''',
                 style: TextStyle(
-                  fontFamily: 'monospace', // FUENTE DE CÓDIGO
-                  color: Colors.white, // TEXTO EN BLANCO PARA CONTRASTE
+                  fontFamily: 'monospace',
+                  color: Colors.white, 
                 ),
               ),
             ),
