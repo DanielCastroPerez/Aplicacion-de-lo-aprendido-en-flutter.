@@ -9,26 +9,31 @@ class Page_AppBar extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         title: const Text('widget AppBar'),
-        backgroundColor:  Colors.blue,
+        backgroundColor: Colors.blue,
         elevation: 10,
       ),
 
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0) ,// agrega un espacio de 16 pixeles alrededor del contenido
+        padding: EdgeInsets.all(16.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,//
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Container(
+              padding: EdgeInsets.only(bottom: 20.0),
               child: Image.asset("assets/AppBar.jpg", fit: BoxFit.fill),
-              margin: EdgeInsets.only(bottom: 20.0),// agrega un espacio de 20 pixeles debajo del contenido
             ),
-            SizedBox(height: 10),
-            SizedBox(
-              height: 200,
-              width: 500,
-              child: SingleChildScrollView(
-                child: Text(
-                  """Barra de aplicación superior que puede mostrar título, íconos, acciones, etc. 
+            Container(
+              //Conteiner explicacion
+              padding: EdgeInsets.all(16.0),
+
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+
+              child: Text(
+                """
+                Barra de aplicación superior que puede mostrar título, íconos, acciones, etc. 
                 La barra de aplicación se utiliza para proporcionar información adicional sobre la aplicación y para permitir al usuario interactuar con ella. 
                 Puede ser utilizada para mostrar el título de la aplicación, los íconos de la aplicación, las acciones que se pueden realizar en la aplicación, 
                 
@@ -39,32 +44,30 @@ class Page_AppBar extends StatelessWidget {
                 En aplicaciones móviles, la barra de aplicación se utiliza para proporcionar información adicional sobre la aplicación y para permitir al usuario interactuar con ella. 
                 En aplicaciones web, la barra de aplicación se utiliza para proporcionar información adicional sobre la aplicación y para permitir al usuario interactuar con ella. 
                 En aplicaciones escritorio, la barra de aplicación se utiliza
-                
-                """,
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
-                  ),
-                  textAlign: TextAlign.justify,
-                ),
+""",
+                textAlign: TextAlign.justify,
+                style: TextStyle(fontSize: 20.0),
               ),
             ),
-            SizedBox(height: 40),
-            SizedBox(
+            SizedBox(height: 20),
+            Container(
+              //Para dar un ejemplo de widget
+              padding: EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                color: Colors.black87,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
               child: Text(
                 """
-                Widget build(BuildContext context){
-                return Scaffold(
-                  appBar: AppBar(
-                    centerTitle: true,
-                    title: const Text('Aplicación AppBar'),
-                    backgroundColor: Colors.orange,
-                  )},
+Widget build(BuildContext context){
+return Scaffold(
+  appBar: AppBar(
+    centerTitle: true,
+    title: const Text('Aplicación AppBar'),
+    backgroundColor: Colors.orange,
+  )},
                   """,
-                style: TextStyle(
-                  fontFamily: 'monospace'
-                ),
+                style: TextStyle(fontFamily: "monospace", color: Colors.white),
               ),
             ),
           ],
