@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class Page_Center extends StatelessWidget {
-  const Page_Center({super.key});
+class Page_Container extends StatelessWidget {
+  const Page_Container({super.key});
 
   @override
   Widget build(BuildContext context) {
