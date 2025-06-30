@@ -5,6 +5,8 @@ class Page_AppBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final widgetData = ModalRoute.of(context)!.settings.arguments as Map;
+    final title_widget = widgetData['AppBar'];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -57,16 +59,7 @@ class Page_AppBar extends StatelessWidget {
                 color: Colors.black87,
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Text(
-                """
-Widget build(BuildContext context){
-return Scaffold(
-  appBar: AppBar(
-    centerTitle: true,
-    title: const Text('Aplicación AppBar'),
-    backgroundColor: Colors.orange,
-  )},
-                  """,
+              child: Text(widgetData['codigo'],
                 style: TextStyle(fontFamily: "monospace", color: Colors.white),
               ),
             ),

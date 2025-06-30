@@ -1,531 +1,566 @@
 [
+  
   {
-    "nombre": "Scaffold",
-    "descripcion": "Widget base para una pantalla que sigue las guías de diseño de Material Design. Permite incluir AppBar, Drawer, FloatingActionButton, BottomNavigationBar y más, estructurando la UI de manera consistente.",
-    "propiedades_comunes": [
-      {
-        "nombre": "appBar",
-        "tipo": "AppBar",
-        "descripcion": "La barra superior de la pantalla, típicamente usada para el título y acciones principales."
-      },
-      {
-        "nombre": "body",
-        "tipo": "Widget",
-        "descripcion": "El contenido principal de la pantalla, donde se construyen la mayoría de los widgets."
-      },
-      {
-        "nombre": "floatingActionButton",
-        "tipo": "FloatingActionButton",
-        "descripcion": "Un botón de acción flotante, a menudo usado para la acción principal de la pantalla."
-      },
-      {
-        "nombre": "drawer",
-        "tipo": "Drawer",
-        "descripcion": "Un panel lateral que se desliza desde el borde de la pantalla (menú hamburguesa)."
-      },
-      {
-        "nombre": "bottomNavigationBar",
-        "tipo": "BottomNavigationBar",
-        "descripcion": "Una barra de navegación en la parte inferior de la pantalla, ideal para cambiar entre secciones principales."
-      },
-      {
-        "nombre": "backgroundColor",
-        "tipo": "Color",
-        "descripcion": "El color de fondo del Scaffold."
-      }
-    ],
-    "usos_comunes": [
-      "Crear la estructura básica de cualquier pantalla en una app Material Design.",
-      "Proveer una AppBar, cajón de navegación (Drawer) o barra de navegación inferior (BottomNavigationBar)."
-    ],
-    "ejemplos_uso": [
-      "Una pantalla de inicio con un título y contenido central.",
-      "Una pantalla de configuración con un menú lateral deslizable.",
-      "Una aplicación con varias pestañas de navegación en la parte inferior."
-    ],
-    "constructores_comunes": [
-      "Scaffold()"
-    ],
-    "widgets_relacionados": [
-      "AppBar",
-      "Drawer",
-      "FloatingActionButton",
-      "BottomNavigationBar",
-      "MaterialApp"
-    ],
-    "cuando_no_usar": "No deberías usar Scaffold si estás construyendo un widget que no necesita ser una 'pantalla' completa con la estructura de Material Design, por ejemplo, un componente reutilizable pequeño como un botón personalizado o un card. Si solo necesitas un contenedor para un grupo de widgets, un `Container` o `Column`/`Row` sería más apropiado.",
-    "ejemplo_avanzado": "Scaffold(\n  appBar: AppBar(\n    title: Text('Mi Tienda'),\n    actions: [\n      IconButton(icon: Icon(Icons.shopping_cart), onPressed: () { /* Acción */ })\n    ],\n  ),\n  body: ListView.builder(\n    itemCount: 10,\n    itemBuilder: (context, index) {\n      return Card(child: ListTile(title: Text('Producto $index')));\n    },\n  ),\n  floatingActionButton: FloatingActionButton(\n    onPressed: () { /* Acción al presionar */ },\n    child: Icon(Icons.add_shopping_cart),\n  ),\n  bottomNavigationBar: BottomNavigationBar(\n    items: [\n      BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Inicio'),\n      BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Configuración'),\n    ],\n    currentIndex: 0,\n    onTap: (index) { /* Cambiar de pestaña */ },\n  ),\n)",
-    "imagen": "assets/Scaffold.jpg",
-    "ruta": "/Page_Scaffold"
-  },
-  {
-    "nombre": "AppBar",
-    "descripcion": "Una barra de herramientas Material Design que se coloca típicamente en la parte superior de un Scaffold. Muestra el título de la pantalla, iconos de acción y puede contener un botón de navegación (como el de 'volver' o el de 'menú').",
-    "propiedades_comunes": [
-      {
-        "nombre": "title",
-        "tipo": "Widget",
-        "descripcion": "El widget principal que se muestra en el centro de la barra (generalmente un Text)."
-      },
-      {
-        "nombre": "leading",
-        "tipo": "Widget",
-        "descripcion": "Un widget que se muestra antes del título, a la izquierda (ej. un icono de menú o flecha de retroceso)."
-      },
-      {
-        "nombre": "actions",
-        "tipo": "List<Widget>",
-        "descripcion": "Una lista de widgets que se muestran a la derecha del título (ej. IconButtons para acciones)."
-      },
-      {
-        "nombre": "bottom",
-        "tipo": "PreferredSizeWidget",
-        "descripcion": "Un widget que se muestra debajo del título de la AppBar, útil para pestañas (TabBar)."
-      },
-      {
-        "nombre": "backgroundColor",
-        "tipo": "Color",
-        "descripcion": "El color de fondo de la AppBar."
-      },
-      {
-        "nombre": "elevation",
-        "tipo": "double",
-        "descripcion": "La sombra debajo de la AppBar, dándole un efecto de elevación."
-      }
-    ],
-    "usos_comunes": [
-      "Mostrar el título de la pantalla actual.",
-      "Proveer botones de navegación (atrás, menú) y acciones (búsqueda, configuración).",
-      "Integrar pestañas de navegación (`TabBar`)."
-    ],
-    "ejemplos_uso": [
-      "Una barra con el título de la aplicación.",
-      "Una barra con un icono de búsqueda y un icono de perfil.",
-      "Una barra con pestañas para diferentes categorías de productos."
-    ],
-    "constructores_comunes": [
-      "AppBar()"
-    ],
-    "widgets_relacionados": [
-      "Scaffold",
-      "TabBar",
-      "IconButton",
-      "Text"
-    ],
-    "cuando_no_usar": "No uses AppBar si la pantalla no necesita una barra de herramientas en la parte superior, o si el diseño es completamente personalizado y no sigue las directrices de Material Design para una barra superior. En esos casos, podrías usar un `Container` o `Row` personalizado para lograr un efecto similar sin las funcionalidades y el estilo predefinidos de AppBar.",
-    "ejemplo_avanzado": "AppBar(\n  title: Text('Mis Tareas'),\n  leading: Builder(\n    builder: (BuildContext context) {\n      return IconButton(\n        icon: const Icon(Icons.menu),\n        onPressed: () { Scaffold.of(context).openDrawer(); },\n        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,\n      );\n    },\n  ),\n  actions: [\n    IconButton(\n      icon: const Icon(Icons.search),\n      onPressed: () { /* Acción de búsqueda */ },\n    ),\n    PopupMenuButton<String>(\n      onSelected: (String result) { /* Acción del menú */ },\n      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[\n        const PopupMenuItem<String>(value: 'Opción 1', child: Text('Opción 1')),\n        const PopupMenuItem<String>(value: 'Opción 2', child: Text('Opción 2')),\n      ],\n    ),\n  ],\n  bottom: TabBar(\n    tabs: [\n      Tab(text: 'Pendientes'),\n      Tab(text: 'Completadas'),\n    ],\n  ),\n)",
-    "imagen": "assets/AppBar.jpg",
-    "ruta": "/Page_AppBar"
-  },
-  {
-    "nombre": "MaterialApp",
-    "descripcion": "Un widget que envuelve tu aplicación Flutter para proveer funcionalidades de Material Design. Es la base para configurar temas, rutas de navegación, localización y otras configuraciones a nivel de aplicación.",
-    "propiedades_comunes": [
-      {
-        "nombre": "home",
-        "tipo": "Widget",
-        "descripcion": "El widget que se muestra como la pantalla principal de la aplicación cuando esta se inicia."
-      },
-      {
-        "nombre": "title",
-        "tipo": "String",
-        "descripcion": "Un título descriptivo para la aplicación, usado por el sistema operativo (ej. en el selector de tareas)."
-      },
-      {
-        "nombre": "theme",
-        "tipo": "ThemeData",
-        "descripcion": "Define el tema visual de la aplicación (colores, tipografías, formas de los componentes)."
-      },
-      {
-        "nombre": "routes",
-        "tipo": "Map<String, WidgetBuilder>",
-        "descripcion": "Un mapa de rutas nombradas que la aplicación puede navegar (ej. '/settings', '/profile')."
-      },
-      {
-        "nombre": "initialRoute",
-        "tipo": "String",
-        "descripcion": "La ruta que se carga primero cuando la aplicación se inicia."
-      },
-      {
-        "nombre": "navigatorKey",
-        "tipo": "GlobalKey<NavigatorState>",
-        "descripcion": "Una clave global para acceder al Navigator de la aplicación desde cualquier parte."
-      },
-      {
-        "nombre": "debugShowCheckedModeBanner",
-        "tipo": "bool",
-        "descripcion": "Controla si se muestra la bandera de 'DEBUG' en la esquina superior derecha."
-      }
-    ],
-    "usos_comunes": [
-      "Definir el punto de entrada principal de una aplicación Flutter.",
-      "Configurar el tema visual global de la aplicación.",
-      "Gestionar la navegación entre diferentes pantallas de la aplicación."
-    ],
-    "ejemplos_uso": [
-      "La configuración inicial de cualquier aplicación Flutter.",
-      "Aplicaciones que necesitan un tema oscuro o un esquema de colores específico.",
-      "Aplicaciones con múltiples pantallas a las que se accede por nombre de ruta."
-    ],
-    "constructores_comunes": [
-      "MaterialApp()",
-      "MaterialApp.router()"
-    ],
-    "widgets_relacionados": [
-      "WidgetsApp (para apps que no siguen Material Design)",
-      "Scaffold",
-      "ThemeData",
-      "Navigator",
-      "Routes"
-    ],
-    "cuando_no_usar": "No uses MaterialApp si tu aplicación no va a seguir las directrices de diseño de Material Design (por ejemplo, si estás creando una app con un diseño muy personalizado o una app puramente basada en iOS con Cupertino design). En ese caso, usarías `WidgetsApp` (la base de `MaterialApp` y `CupertinoApp`) y construirías tu UI desde cero.",
-    "ejemplo_avanzado": "MaterialApp(\n  title: 'Mi App Personalizada',\n  theme: ThemeData(\n    primarySwatch: Colors.deepPurple,\n    fontFamily: 'Roboto',\n    appBarTheme: AppBarTheme(\n      color: Colors.deepPurpleAccent,\n      elevation: 4,\n    ),\n  ),\n  initialRoute: '/',\n  routes: {\n    '/': (context) => const HomeScreen(),\n    '/settings': (context) => const SettingsScreen(),\n    '/profile': (context) => const ProfileScreen(),\n  },\n  onGenerateRoute: (settings) {\n    // Lógica para rutas dinámicas o no definidas\n    if (settings.name == '/detail') {\n      final args = settings.arguments as Map<String, dynamic>;\n      return MaterialPageRoute(builder: (context) => DetailScreen(item: args['item']));\n    }\n    return null; // Dejar que el sistema maneje el error 404\n  },\n)",
-    "notas_importantes": [
-      "**MaterialApp es el corazón de la navegación:** Las propiedades `routes` e `initialRoute` son exclusivas de `MaterialApp` porque es el widget que establece el contexto de navegación a nivel de toda tu aplicación. Actúa como el 'sistema operativo' que permite a tu app moverse entre diferentes pantallas de manera organizada.",
-      "**Rutas Nombradas:** `routes` define un mapa de 'direcciones' internas (como URLs) para cada pantalla. Esto permite navegar de forma limpia, sin pasar directamente los widgets de las pantallas.",
-      "**Punto de Inicio (`home`):** La propiedad `home` es el widget que se muestra como la pantalla principal de la aplicación cuando esta se inicia. Es la 'puerta principal' visual de tu app.",
-      "**`home` vs `initialRoute`:** Si defines la propiedad `home`, esta tendrá prioridad y la `initialRoute` será ignorada para la pantalla inicial. `initialRoute` se usa principalmente cuando toda tu navegación se basa en rutas nombradas.",
-      "**`home` vs `body`:** `home` (en `MaterialApp`) define **toda la pantalla inicial** de la aplicación. `body` (en `Scaffold`) define el **contenido principal *dentro* de una pantalla** (`Scaffold`). `MaterialApp` es el marco de la aplicación, `home` define la primera pantalla completa, y `body` es la sección central de esa pantalla."
-    ],
-    "imagen": "assets/MaterialApp.jpg",
-    "ruta": "/Page_MaterialApp"
-  },
-  {
-    "nombre": "Container",
-    "descripcion": "Un widget flexible que se usa para contener, dimensionar y posicionar otros widgets. Puedes personalizar su ancho, alto, color, bordes, relleno (padding), margen (margin) y sombras. Es muy útil para agrupar elementos y darles un estilo visual específico.",
-    
-    "propiedades_comunes": [
-      {
-        "nombre": "width",
-        "tipo": "double",
-        "descripcion": "Define el ancho del contenedor."
-      },
-      {
-        "nombre": "height",
-        "tipo": "double",
-        "descripcion": "Define el alto del contenedor."
-      },
-      {
-        "nombre": "color",
-        "tipo": "Color",
-        "descripcion": "Establece el color de fondo del contenedor."
-      },
-      {
-        "nombre": "padding",
-        "tipo": "EdgeInsetsGeometry",
-        "descripcion": "Espacio interno entre el borde del contenedor y su contenido (child)."
-      },
-      {
-        "nombre": "margin",
-        "tipo": "EdgeInsetsGeometry",
-        "descripcion": "Espacio externo entre el borde del contenedor y otros widgets."
-      },
-      {
-        "nombre": "decoration",
-        "tipo": "Decoration",
-        "descripcion": "Permite personalizar el aspecto visual del contenedor (bordes, esquinas redondeadas, gradientes, sombras). Si usas 'decoration', no puedes usar 'color' directamente en el Container."
-      },
-      {
-        "nombre": "child",
-        "tipo": "Widget",
-        "descripcion": "El widget que contiene el Container."
-      }
-    ],
-    "usos_comunes": [
-      "Crear tarjetas o paneles con estilos personalizados.",
-      "Establecer dimensiones específicas para un widget.",
-      "Añadir espaciado (padding y margin) alrededor de los elementos.",
-      "Aplicar colores de fondo, bordes o sombras a un área."
-    ],
-    "ejemplos_uso": [
-      "Un botón con un fondo de color y esquinas redondeadas.",
-      "Un cuadro de texto con un borde.",
-      "Un espacio vacío para separar elementos."
-    ],
-    "constructores_comunes": [
-      "Container()"
-    ],
-    "widgets_relacionados": [
-      "SizedBox",
-      "Padding",
-      "DecoratedBox",
-      "Align",
-      "Center"
-    ],
-    "cuando_no_usar": "No deberías usar un Container si solo necesitas aplicar padding o margin a un widget, ya que existen widgets más específicos y ligeros como `Padding` o `SizedBox` para eso. También, si solo quieres un color de fondo sin ninguna otra personalización de diseño (bordes, etc.), podrías considerar usar un `ColoredBox`.",
-    "ejemplo_avanzado": "Container(\n  width: double.infinity,\n  height: 150.0,\n  margin: EdgeInsets.all(16.0),\n  decoration: BoxDecoration(\n    color: Colors.white,\n    borderRadius: BorderRadius.circular(15.0),\n    boxShadow: [\n      BoxShadow(\n        color: Colors.grey.withOpacity(0.5),\n        spreadRadius: 5,\n        blurRadius: 7,\n        offset: Offset(0, 3), // changes position of shadow\n      ),\n    ],\n  ),\n  child: Column(\n    mainAxisAlignment: MainAxisAlignment.center,\n    children: [\n      Text(\n        '¡Oferta Especial!',\n        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.deepOrange),\n      ),\n      SizedBox(height: 10),\n      Text(\n        'Hasta 50% de descuento en artículos seleccionados.',\n        textAlign: TextAlign.center,\n        style: TextStyle(fontSize: 16, color: Colors.grey[700]),\n      ),\n    ],\n  ),\n)",
-    "imagen": "assets/Container.jpg",
-    "ruta": "/Page_Container"
-  },
-  {
-    "nombre": "Column",
-    "descripcion": "Un widget que organiza sus 'children' (hijos) en una secuencia vertical. Es fundamental para construir layouts donde los elementos se apilan uno encima del otro.",
-    "propiedades_comunes": [
-      {
-        "nombre": "children",
-        "tipo": "List<Widget>",
-        "descripcion": "La lista de widgets que se mostrarán verticalmente dentro de la columna."
-      },
-      {
-        "nombre": "mainAxisAlignment",
-        "tipo": "MainAxisAlignment",
-        "descripcion": "Cómo se alinean los hijos a lo largo del eje principal (vertical) de la columna (ej. start, center, end, spaceBetween, spaceAround, spaceEvenly)."
-      },
-      {
-        "nombre": "crossAxisAlignment",
-        "tipo": "CrossAxisAlignment",
-        "descripcion": "Cómo se alinean los hijos a lo largo del eje transversal (horizontal) de la columna (ej. start, center, end, stretch)."
-      },
-      {
-        "nombre": "mainAxisSize",
-        "tipo": "MainAxisSize",
-        "descripcion": "Define cuánto espacio debe ocupar la columna a lo largo de su eje principal (vertical). 'max' ocupa todo el espacio disponible, 'min' ocupa solo el espacio necesario para sus hijos."
-      }
-    ],
-    "usos_comunes": [
-      "Crear listas de elementos apilados.",
-      "Organizar formularios verticalmente.",
-      "Diseñar la estructura principal de una pantalla junto con Row."
-    ],
-    "ejemplos_uso": [
-      "Una lista de elementos en un menú.",
-      "Campos de texto y botones en un formulario de registro.",
-      "Una tarjeta con una imagen arriba y un texto debajo."
-    ],
-    "constructores_comunes": [
-      "Column()"
-    ],
-    "widgets_relacionados": [
-      "Row",
-      "Expanded",
-      "Flexible",
-      "ListView"
-    ],
-    "cuando_no_usar": "No uses Column para listas muy largas o infinitas, ya que carga todos sus hijos a la vez, lo que puede afectar el rendimiento. Para eso, es mejor usar widgets como `ListView.builder` o `CustomScrollView` que solo renderizan los elementos visibles en pantalla. Tampoco lo uses si necesitas que los elementos se posicionen en capas (usa `Stack`) o si solo tienes un hijo (usa un `Container` o el widget directamente).",
-    "ejemplo_avanzado": "Column(\n  mainAxisAlignment: MainAxisAlignment.center,\n  crossAxisAlignment: CrossAxisAlignment.stretch,\n  children: <Widget>[\n    Text(\n      'Título Grande',\n      style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),\n      textAlign: TextAlign.center,\n    ),\n    SizedBox(height: 15),\n    Container(\n      padding: EdgeInsets.all(10),\n      color: Colors.blueAccent.withOpacity(0.2),\n      child: Text(\n        'Este es un párrafo de ejemplo que muestra cómo el texto se estira en la columna debido a crossAxisAlignment.stretch.',\n        textAlign: TextAlign.justify,\n      ),\n    ),\n    SizedBox(height: 15),\n    Row(\n      mainAxisAlignment: MainAxisAlignment.spaceAround,\n      children: <Widget>[\n        Icon(Icons.star, color: Colors.amber, size: 30),\n        Icon(Icons.star, color: Colors.amber, size: 30),\n        Icon(Icons.star_border, color: Colors.amber, size: 30),\n      ],\n    ),\n  ],\n)",
-    "imagen": "assets/Column.jpg",
-    "ruta": "/Page_Column"
-  },
-  {
-    "nombre": "Row",
-    "descripcion": "Un widget que organiza sus 'children' (hijos) en una secuencia horizontal. Es fundamental para construir layouts donde los elementos se colocan uno al lado del otro.",
-    "propiedades_comunes": [
-      {
-        "nombre": "children",
-        "tipo": "List<Widget>",
-        "descripcion": "La lista de widgets que se mostrarán horizontalmente dentro de la fila."
-      },
-      {
-        "nombre": "mainAxisAlignment",
-        "tipo": "MainAxisAlignment",
-        "descripcion": "Cómo se alinean los hijos a lo largo del eje principal (horizontal) de la fila (ej. start, center, end, spaceBetween, spaceAround, spaceEvenly)."
-      },
-      {
-        "nombre": "crossAxisAlignment",
-        "tipo": "CrossAxisAlignment",
-        "descripcion": "Cómo se alinean los hijos a lo largo del eje transversal (vertical) de la fila (ej. start, center, end, stretch)."
-      },
-      {
-        "nombre": "mainAxisSize",
-        "tipo": "MainAxisSize",
-        "descripcion": "Define cuánto espacio debe ocupar la fila a lo largo de su eje principal (horizontal). 'max' ocupa todo el espacio disponible, 'min' ocupa solo el espacio necesario para sus hijos."
-      }
-    ],
-    "usos_comunes": [
-      "Crear barras de navegación o herramientas.",
-      "Organizar íconos y texto uno al lado del otro.",
-      "Diseñar la estructura principal de una pantalla junto con Column."
-    ],
-    "ejemplos_uso": [
-      "Botones en una barra inferior de la aplicación.",
-      "Un ícono de usuario seguido de su nombre.",
-      "Una fila de imágenes pequeñas."
-    ],
-    "constructores_comunes": [
-      "Row()"
-    ],
-    "widgets_relacionados": [
-      "Column",
-      "Expanded",
-      "Flexible",
-      "Wrap"
-    ],
-    "cuando_no_usar": "Evita usar Row si los widgets hijos son demasiado anchos y podrían desbordarse (salirse de la pantalla) si el espacio horizontal es limitado. Para casos donde los elementos pueden saltar a la siguiente línea si no hay espacio, considera usar `Wrap`. Tampoco lo uses si solo tienes un hijo y no necesitas un alineamiento específico que un `Container` o `Align` no puedan manejar.",
-    "ejemplo_avanzado": "Row(\n  mainAxisAlignment: MainAxisAlignment.spaceBetween,\n  crossAxisAlignment: CrossAxisAlignment.center,\n  children: <Widget>[\n    Expanded(\n      flex: 2,\n      child: Container(\n        color: Colors.red[100],\n        padding: EdgeInsets.all(8.0),\n        child: Text('Elemento A (Exp)', textAlign: TextAlign.center),\n      ),\n    ),\n    Flexible(\n      flex: 1,\n      child: Container(\n        color: Colors.green[100],\n        padding: EdgeInsets.all(8.0),\n        child: Text('Elemento B (Flex)', textAlign: TextAlign.center),\n      ),\n    ),\n    Container(\n      width: 50,\n      height: 50,\n      color: Colors.blue[100],\n      child: Icon(Icons.arrow_forward),\n    ),\n  ],\n)",
-    "imagen": "assets/Row.jpg",
-    "ruta": "/Page_Row"
-  },
-  {
-    "nombre": "Text",
-    "descripcion": "Un widget fundamental que se utiliza para mostrar una cadena de texto en la interfaz de usuario de tu aplicación.",
-    "propiedades_comunes": [
-      {
-        "nombre": "data",
-        "tipo": "String",
-        "descripcion": "La cadena de texto que se va a mostrar."
-      },
-      {
-        "nombre": "style",
-        "tipo": "TextStyle",
-        "descripcion": "Define el estilo visual completo del texto. Acepta un objeto `TextStyle` que permite personalizar:\n    - **`color`**: El color del texto.\n    - **`fontSize`**: El tamaño de la fuente.\n    - **`fontWeight`**: El grosor de la fuente (ej. `FontWeight.bold` para negrita, `FontWeight.normal`).\n    - **`fontStyle`**: El estilo de la fuente (ej. `FontStyle.italic` para cursiva, `FontStyle.normal`).\n    - **`fontFamily`**: La familia de la fuente (el tipo de letra, ej. 'Roboto', 'OpenSans').\n    - **`decoration`**: Decoraciones como `TextDecoration.underline` (subrayado), `TextDecoration.lineThrough` (tachado), `TextDecoration.overline`.\n    - **`decorationColor`**: El color de la decoración.\n    - **`decorationStyle`**: El estilo de la línea de decoración (ej. `TextDecorationStyle.wavy`).\n    - **`letterSpacing`**: El espacio horizontal entre los caracteres del texto.\n    - **`wordSpacing`**: El espacio horizontal entre las palabras del texto.\n    - **`height`**: La altura de la línea de texto, como un multiplicador del `fontSize`.\n    - **`shadows`**: Una lista de sombras para aplicar al texto (`List<Shadow>`).\n    - **`background`**: Un `Paint` para dibujar detrás del texto."
-      },
-      {
-        "nombre": "textAlign",
-        "tipo": "TextAlign",
-        "descripcion": "Cómo se alinea el texto horizontalmente dentro de su espacio (ej. `TextAlign.left`, `TextAlign.center`, `TextAlign.right`, `TextAlign.justify`)."
-      },
-      {
-        "nombre": "maxLines",
-        "tipo": "int",
-        "descripcion": "El número máximo de líneas para el texto. Si el texto excede este límite, se aplicará el `overflow`."
-      },
-      {
-        "nombre": "overflow",
-        "tipo": "TextOverflow",
-        "descripcion": "Cómo se maneja el texto si excede el espacio disponible (ej. `TextOverflow.ellipsis` para añadir '...', `TextOverflow.fade`, `TextOverflow.clip`)."
-      },
-      {
-        "nombre": "textDirection",
-        "tipo": "TextDirection",
-        "descripcion": "La dirección del texto para diseño y renderizado (ej. `TextDirection.ltr` para izquierda a derecha, `TextDirection.rtl` para derecha a izquierda)."
-      }
-    ],
-    "usos_comunes": [
-      "Mostrar cualquier tipo de información textual en la UI (títulos, párrafos, etiquetas).",
-      "Etiquetas para botones o campos de entrada.",
-      "Mensajes informativos para el usuario."
-    ],
-    "ejemplos_uso": [
-      "Un título para una sección de la aplicación.",
-      "El nombre de un producto en una lista.",
-      "Un mensaje de error o éxito."
-    ],
-    "constructores_comunes": [
-      "Text()"
-    ],
-    "widgets_relacionados": [
-      "RichText (para texto con múltiples estilos)",
-      "DefaultTextStyle (para establecer un estilo de texto predeterminado para un subárbol)",
-      "Icon (para iconos visuales)"
-    ],
-    "cuando_no_usar": "No uses `Text` si necesitas un texto que sea editable (para eso usarías `TextField`). Tampoco si necesitas un texto muy complejo con múltiples estilos o gestos específicos en partes del texto que no puedan ser manejados por `Text.rich` (en ese caso, `RichText` es más adecuado).",
-    "ejemplo_avanzado": "Text(\n  'Este es un texto largo que podría truncarse si no hay suficiente espacio. Aquí demostramos cómo manejar el desbordamiento con puntos suspensivos.',\n  textAlign: TextAlign.justify,\n  maxLines: 2,\n  overflow: TextOverflow.ellipsis,\n  style: TextStyle(\n    color: Colors.deepPurple,\n    fontSize: 18,\n    fontWeight: FontWeight.w500,\n    letterSpacing: 0.5,\n    decoration: TextDecoration.underline,\n    decorationColor: Colors.deepPurple,\n    decorationStyle: TextDecorationStyle.wavy,\n  ),\n);",
-    "imagen": "assets/Text.jpg",
-    "ruta": "/Page_Text"
-  },
-  {
-    "nombre": "SingleChildScrollView",
-    "descripcion": "Un widget que permite que su único hijo (child) sea desplazable (scrollable) si excede el espacio disponible en la pantalla. Ideal para contenido que podría ser más grande que la vista pero no es una lista dinámica o infinita.",
-    "propiedades_comunes": [
-      {
-        "nombre": "child",
-        "tipo": "Widget",
-        "descripcion": "El único widget que contendrá y hará desplazable."
-      },
-      {
-        "nombre": "scrollDirection",
-        "tipo": "Axis",
-        "descripcion": "La dirección en la que el contenido puede desplazarse (Axis.vertical por defecto, o Axis.horizontal)."
-      },
-      {
-        "nombre": "padding",
-        "tipo": "EdgeInsetsGeometry",
-        "descripcion": "Espacio interno alrededor del hijo desplazable."
-      },
-      {
-        "nombre": "physics",
-        "tipo": "ScrollPhysics",
-        "descripcion": "Define cómo se comporta el desplazamiento (ej. 'bouncing' en iOS, 'clamping' en Android)."
-      }
-    ],
-    "usos_comunes": [
-      "Evitar desbordamientos (overflows) cuando el contenido excede el espacio disponible.",
-      "Hacer desplazables formularios largos o pantallas de configuración con muchos campos.",
-      "Mostrar páginas de información estática que pueden variar en longitud."
-    ],
-    "ejemplos_uso": [
-      "Una pantalla de perfil de usuario con muchos detalles.",
-      "Un formulario de registro con más campos de los que caben en una sola pantalla.",
-      "Una página de 'Acerca de nosotros' o 'Términos y Condiciones'."
-    ],
-    "constructores_comunes": [
-      "SingleChildScrollView()"
-    ],
-    "widgets_relacionados": [
-      "ListView",
-      "Column",
-      "Row",
-      "CustomScrollView"
-    ],
-    "cuando_no_usar": "No uses `SingleChildScrollView` para listas muy largas o infinitas, ya que carga todos sus hijos a la vez, lo que puede afectar el rendimiento. Para esos casos, `ListView.builder` o `CustomScrollView` son mucho más eficientes. Tampoco es adecuado si necesitas múltiples regiones desplazables independientes o un comportamiento de desplazamiento complejo.",
-    "ejemplo_avanzado": "SingleChildScrollView(\n  scrollDirection: Axis.vertical,\n  padding: EdgeInsets.all(20.0),\n  child: Column(\n    mainAxisAlignment: MainAxisAlignment.start,\n    crossAxisAlignment: CrossAxisAlignment.start,\n    children: <Widget>[\n      Text(\n        'Título de la Página Desplazable',\n        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold),\n      ),\n      SizedBox(height: 15),\n      Container(\n        height: 200, // Contenedor que puede ser más alto que la pantalla\n        color: Colors.blue[100],\n        alignment: Alignment.center,\n        child: Text('Contenido que se desplaza hacia abajo'),\n      ),\n      SizedBox(height: 20),\n      TextField(\n        decoration: InputDecoration(labelText: 'Campo de texto 1', border: OutlineInputBorder()),\n      ),\n      SizedBox(height: 10),\n      TextField(\n        decoration: InputDecoration(labelText: 'Campo de texto 2', border: OutlineInputBorder()),\n      ),\n      SizedBox(height: 10),\n      TextField(\n        decoration: InputDecoration(labelText: 'Campo de texto 3', border: OutlineInputBorder()),\n      ),\n      SizedBox(height: 10),\n      // ... puedes agregar muchos más widgets aquí\n      Padding(\n        padding: const EdgeInsets.only(top: 20.0),\n        child: ElevatedButton(onPressed: () {}, child: Text('Guardar Configuración')),\n      )\n    ],\n  ),\n)",
-    "imagen": "assets/SingleChildScrollView.jpg",
-    "ruta": "/Page_SingleChildScrollView"
-  },
-  {
-    "nombre": "Image",
-    "descripcion": "Un widget que se utiliza para mostrar imágenes de diversas fuentes (assets, red, archivos).",
-    "propiedades_comunes": [
-      {
-        "nombre": "image",
-        "tipo": "ImageProvider",
-        "descripcion": "La fuente de la imagen (ej. AssetImage, NetworkImage, FileImage)."
-      },
-      {
-        "nombre": "width",
-        "tipo": "double",
-        "descripcion": "El ancho deseado de la imagen."
-      },
-      {
-        "nombre": "height",
-        "tipo": "double",
-        "descripcion": "La altura deseada de la imagen."
-      },
-      {
-        "nombre": "fit",
-        "tipo": "BoxFit",
-        "descripcion": "Define cómo la imagen debe ser escalada y posicionada dentro de los límites de su contenedor. **Valores comunes:** `BoxFit.fill` (estira, distorsiona), `BoxFit.contain` (cabe, mantiene aspecto, puede dejar espacios), `BoxFit.cover` (llena, mantiene aspecto, puede recortar), `BoxFit.fitWidth` (ajusta ancho), `BoxFit.fitHeight` (ajusta altura), `BoxFit.scaleDown` (original o `contain`)."
-      },
-      {
-        "nombre": "alignment",
-        "tipo": "AlignmentGeometry",
-        "descripcion": "Cómo alinear la imagen dentro del espacio disponible si no la llena completamente."
-      },
-      {
-        "nombre": "color",
-        "tipo": "Color",
-        "descripcion": "Un color para aplicar a la imagen con un `colorBlendMode`."
-      },
-      {
-        "nombre": "repeat",
-        "tipo": "ImageRepeat",
-        "descripcion": "Cómo repetir la imagen si es más pequeña que el espacio disponible."
-      }
-    ],
-    "usos_comunes": [
-      "Mostrar iconos, logos o fotografías en la UI.",
-      "Fondos de pantalla o de secciones.",
-      "Imágenes de perfil o de producto."
-    ],
-    "ejemplos_uso": [
-      "Una imagen de un producto en una tienda online.",
-      "El logo de la aplicación en la pantalla de inicio.",
-      "Imágenes en una galería de fotos."
-    ],
-    "constructores_comunes": [
-      "Image.asset()",
-      "Image.network()",
-      "Image.file()",
-      "Image.memory()"
-    ],
-    "widgets_relacionados": [
-      "FadeInImage",
-      "CircleAvatar",
-      "Icon"
-    ],
-    "cuando_no_usar": "No uses `Image` si solo necesitas un icono simple que sea parte de un conjunto de iconos predefinidos de Material Design (usa `Icon` en su lugar). Para animaciones complejas o imágenes con interactividad muy específica que `Image` no soporta fácilmente, podrías considerar librerías de terceros o un `CustomPaint`.",
-    "ejemplo_avanzado": "Container(\n  width: double.infinity,\n  height: 250,\n  decoration: BoxDecoration(\n    border: Border.all(color: Colors.blueAccent, width: 3),\n    borderRadius: BorderRadius.circular(10),\n  ),\n  child: ClipRRect(\n    borderRadius: BorderRadius.circular(8),\n    child: Image.network(\n      'https://picsum.photos/id/237/800/600', // Ejemplo de URL de imagen\n      fit: BoxFit.cover, // Prueba con cover, contain, fill, etc.\n      loadingBuilder: (context, child, loadingProgress) {\n        if (loadingProgress == null) return child;\n        return Center(\n          child: CircularProgressIndicator(\n            value: loadingProgress.expectedTotalBytes != null\n                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!\n                : null,\n          ),\n        );\n      },\n      errorBuilder: (context, error, stackTrace) {\n        return Center(child: Icon(Icons.broken_image, size: 80, color: Colors.grey));\n      },\n    ),\n  ),\n)",
-    "imagen": "assets/Image.jpg",
-    "ruta": "/Page_Image"
-  }
+  "nombre": "Scaffold",
+  "descripcion": "Un widget fundamental de Material Design que proporciona una estructura básica para implementar el diseño visual de tu aplicación. Sirve como el 'lienzo' principal donde colocas otros widgets como la barra de aplicación, el cuerpo principal, el botón de acción flotante, etc.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "appBar",
+      "tipo": "AppBar",
+      "descripcion_extendida": "Una barra en la parte superior de la pantalla. Típicamente muestra el título de la aplicación, acciones y un botón de navegación (como el menú de hamburguesa o el botón de retroceso).",
+      "ejemplo_propiedad": "Scaffold(\n  appBar: AppBar(\n    title: const Text('Mi Aplicación'),\n  ),\n  // ... otras propiedades\n)"
+    },
+    {
+      "nombre": "body",
+      "tipo": "Widget",
+      "descripcion_extendida": "El contenido principal de la pantalla, ubicado debajo del `appBar` y cubriendo la mayor parte del área visible. Aquí es donde colocas la interfaz de usuario central de tu pantalla (listas, formularios, imágenes, etc.).",
+      "ejemplo_propiedad": "Scaffold(\n  body: Center(\n    child: Text('¡Hola, Mundo!'),\n  ),\n  // ... otras propiedades\n)"
+    },
+    {
+      "nombre": "floatingActionButton",
+      "tipo": "FloatingActionButton",
+      "descripcion_extendida": "Un botón circular que flota sobre el contenido del `body`, típicamente usado para la acción principal de la pantalla (ej. añadir un nuevo elemento, componer un correo).",
+      "ejemplo_propiedad": "Scaffold(\n  floatingActionButton: FloatingActionButton(\n    onPressed: () {\n      print('Botón flotante presionado');\n    },\n    child: const Icon(Icons.add),\n  ),\n  // ... otras propiedades\n)"
+    },
+    {
+      "nombre": "drawer",
+      "tipo": "Drawer",
+      "descripcion_extendida": "Un panel deslizante que se muestra desde el borde izquierdo de la pantalla (o derecho en RTL). Comúnmente utilizado para la navegación principal de la aplicación.",
+      "ejemplo_propiedad": "Scaffold(\n  drawer: Drawer(\n    child: ListView(\n      padding: EdgeInsets.zero,\n      children: const [\n        DrawerHeader(\n          decoration: BoxDecoration(\n            color: Colors.blue,\n          ),\n          child: Text('Encabezado del Drawer'),\n        ),\n        ListTile(title: Text('Opción 1')),\n        ListTile(title: Text('Opción 2')),\n      ],\n    ),\n  ),\n  // ... otras propiedades\n)"
+    },
+    {
+      "nombre": "bottomNavigationBar",
+      "tipo": "BottomNavigationBar",
+      "descripcion_extendida": "Una barra en la parte inferior de la pantalla que permite cambiar rápidamente entre un número pequeño de vistas de nivel superior (generalmente entre 3 y 5).",
+      "ejemplo_propiedad": "Scaffold(\n  bottomNavigationBar: BottomNavigationBar(\n    items: const [\n      BottomNavigationBarItem(\n        icon: Icon(Icons.home),\n        label: 'Inicio',\n      ),\n      BottomNavigationBarItem(\n        icon: Icon(Icons.settings),\n        label: 'Ajustes',\n      ),\n    ],\n    onTap: (index) { print('Ítem $index seleccionado'); },\n  ),\n  // ... otras propiedades\n)"
+    },
+    {
+      "nombre": "backgroundColor",
+      "tipo": "Color",
+      "descripcion_extendida": "El color de fondo del Scaffold. Por defecto, es el `scaffoldBackgroundColor` del tema de la aplicación.",
+      "ejemplo_propiedad": "Scaffold(\n  backgroundColor: Colors.grey.shade200,\n  body: const Center(child: Text('Fondo Gris Claro')),\n)"
+    }
+  ],
+  "usos_comunes": [
+    "La base para casi todas las pantallas de una aplicación Flutter que siguen las guías de Material Design.",
+    "Organizar los elementos estructurales de la UI de una manera estándar y predecible."
+  ],
+  "constructores_comunes": [
+    "Scaffold()"
+  ],
+  "widgets_relacionados": [
+    "AppBar",
+    "FloatingActionButton",
+    "Drawer",
+    "BottomNavigationBar",
+    "MaterialApp (que contiene el Scaffold)"
+  ],
+  "cuando_no_usar": "No uses `Scaffold` si estás construyendo un widget muy pequeño y específico que no necesita una estructura de pantalla completa (ej. un elemento de una lista, un botón personalizado). Para esos casos, un `Container` o un widget más simple sería suficiente.",
+  "ejemplo_avanzado": "Scaffold(\n  appBar: AppBar(\n    title: const Text('Mi App Completa'),\n    actions: [\n      IconButton(icon: const Icon(Icons.search), onPressed: () {}),\n    ],\n  ),\n  body: const Center(\n    child: Text(\n      'Contenido principal de la aplicación.',\n      style: TextStyle(fontSize: 20),\n    ),\n  ),\n  floatingActionButton: FloatingActionButton.extended(\n    onPressed: () {},\n    label: const Text('Crear'),\n    icon: const Icon(Icons.add),\n  ),\n  drawer: Drawer(\n    child: ListView(\n      children: const [\n        UserAccountsDrawerHeader(\n          accountName: Text('Usuario Ejemplo'),\n          accountEmail: Text('ejemplo@correo.com'),\n          currentAccountPicture: CircleAvatar(child: Text('U')),\n        ),\n        ListTile(title: Text('Inicio'), leading: Icon(Icons.home)),\n        ListTile(title: Text('Perfil'), leading: Icon(Icons.person)),\n      ],\n    ),\n  ),\n  bottomNavigationBar: BottomNavigationBar(\n    items: const [\n      BottomNavigationBarItem(icon: Icon(Icons.favorite), label: 'Favoritos'),\n      BottomNavigationBarItem(icon: Icon(Icons.notifications), label: 'Notificaciones'),\n      BottomNavigationBarItem(icon: Icon(Icons.message), label: 'Mensajes'),\n    ],\n  ),\n);",
+  "imagen": "assets/Scaffold.jpg",
+  "ruta": "/Page_Scaffold"
+},
+
+
+{
+  "nombre": "AppBar",
+  "descripcion": "Una barra de herramientas de Material Design que se coloca típicamente en la parte superior de un `Scaffold`. Se usa para mostrar el título de la pantalla, iconos de acción, y puede contener un botón de navegación (como el de 'volver' o el de 'menú de hamburguesa').",
+  "propiedades_detalladas": [
+    {
+      "nombre": "title",
+      "tipo": "Widget",
+      "descripcion_extendida": "El widget principal que se muestra en el centro de la barra. Generalmente, es un widget `Text` que muestra el título de la pantalla actual. Puedes personalizar su estilo con `TextStyle`.",
+      "ejemplo_propiedad": "AppBar(\n  title: const Text('Mi Título'),\n)"
+    },
+    {
+      "nombre": "leading",
+      "tipo": "Widget",
+      "descripcion_extendida": "Un widget opcional que se muestra antes del `title` (a la izquierda) en la `AppBar`. Comúnmente, es un `IconButton` para un menú de navegación (`Icons.menu`) o una flecha de retroceso (`Icons.arrow_back`). Si un `Scaffold` tiene un `Drawer` o si hay una ruta previa en el navegador, Flutter a menudo provee automáticamente un botón `leading`.",
+      "ejemplo_propiedad": "AppBar(\n  leading: IconButton(\n    icon: const Icon(Icons.menu),\n    onPressed: () {\n      // Acción para abrir el Drawer\n      Scaffold.of(context).openDrawer();\n    },\n  ),\n  title: const Text('Menú Principal'),\n)"
+    },
+    {
+      "nombre": "actions",
+      "tipo": "List<Widget>",
+      "descripcion_extendida": "Una lista de widgets que se muestran después del `title` (a la derecha) en la `AppBar`. Usualmente son `IconButtons` para acciones comunes como búsqueda, compartir, o configuraciones. Se muestran en el orden en que se listan.",
+      "ejemplo_propiedad": "AppBar(\n  title: const Text('Acciones'),\n  actions: [\n    IconButton(icon: const Icon(Icons.search), onPressed: () { /* Acción de búsqueda */ }),\n    IconButton(icon: const Icon(Icons.settings), onPressed: () { /* Acción de configuración */ }),\n  ],\n)"
+    },
+    {
+      "nombre": "bottom",
+      "tipo": "PreferredSizeWidget",
+      "descripcion_extendida": "Un widget que se muestra directamente debajo de la `AppBar` principal. Es muy útil para integrar pestañas de navegación (`TabBar`) o cualquier otro widget que necesite anclarse en la parte inferior de la barra de aplicación.",
+      "ejemplo_propiedad": "AppBar(\n  title: const Text('Pestañas'),\n  bottom: const TabBar(\n    tabs: [\n      Tab(icon: Icon(Icons.home)),\n      Tab(icon: Icon(Icons.settings)),\n    ],\n  ),\n)"
+    },
+    {
+      "nombre": "backgroundColor",
+      "tipo": "Color",
+      "descripcion_extendida": "El color de fondo de la `AppBar`. Por defecto, es el `primaryColor` del tema de la aplicación. Puedes personalizarlo para que coincida con la paleta de colores de tu diseño.",
+      "ejemplo_propiedad": "AppBar(\n  backgroundColor: Colors.indigo.shade700,\n  title: const Text('Fondo Azul Oscuro'),\n)"
+    },
+    {
+      "nombre": "elevation",
+      "tipo": "double",
+      "descripcion_extendida": "La sombra visual debajo de la `AppBar`, que le da un efecto de elevación sobre el contenido. Un valor de `0.0` elimina la sombra. Un valor mayor hace la sombra más pronunciada.",
+      "ejemplo_propiedad": "AppBar(\n  elevation: 4.0, // Sombra estándar\n  title: const Text('Con Sombra'),\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Mostrar el título de la pantalla actual o el nombre de la aplicación.",
+    "Proveer botones de navegación (atrás, menú) y acciones rápidas (búsqueda, configuración, guardar).",
+    "Integrar barras de pestañas (`TabBar`) para navegación secundaria."
+  ],
+  "constructores_comunes": [
+    "AppBar()"
+  ],
+  "widgets_relacionados": [
+    "Scaffold (el padre común de AppBar)",
+    "IconButton (usado frecuentemente en `leading` y `actions`)",
+    "TabBar (usado en la propiedad `bottom`)",
+    "Text (usado comúnmente en `title`)"
+  ],
+  "cuando_no_usar": "No uses `AppBar` si la pantalla no necesita una barra de herramientas en la parte superior, o si el diseño es completamente personalizado y no sigue las directrices de Material Design para una barra superior. En esos casos, podrías usar un `Container` o `Row` personalizado para lograr un efecto similar sin las funcionalidades y el estilo predefinidos de `AppBar`.",
+  "ejemplo_avanzado": "AppBar(\n  title: const Text('Detalles del Producto'),\n  leading: IconButton(\n    icon: const Icon(Icons.arrow_back),\n    onPressed: () => Navigator.of(context).pop(),\n  ),\n  actions: [\n    IconButton(\n      icon: const Icon(Icons.share),\n      onPressed: () { /* Compartir */ },\n    ),\n    PopupMenuButton<String>(\n      onSelected: (item) => print('Seleccionado: $item'),\n      itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[\n        const PopupMenuItem<String>(value: 'Editar', child: Text('Editar')),\n        const PopupMenuItem<String>(value: 'Eliminar', child: Text('Eliminar')),\n      ],\n    ),\n  ],\n  flexibleSpace: Container(\n    decoration: const BoxDecoration(\n      gradient: LinearGradient(\n        colors: [Colors.purple, Colors.red],\n        begin: Alignment.topLeft,\n        end: Alignment.bottomRight,\n      ),\n    ),\n  ), // Espacio flexible para gradientes, etc.\n  elevation: 10.0,\n  toolbarHeight: 80.0, // Altura personalizada de la barra de herramientas\n)",
+  "imagen": "assets/AppBar.jpg",
+  "ruta": "/Page_AppBar"
+},
+
+{
+  "nombre": "MaterialApp",
+  "descripcion": "Un widget que envuelve tu aplicación Flutter para proveer funcionalidades de Material Design. Es la base fundamental para configurar el tema visual de la app, las rutas de navegación, la localización y otras configuraciones a nivel de toda la aplicación.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "home",
+      "tipo": "Widget",
+      "descripcion_extendida": "El widget que se muestra como la pantalla principal de la aplicación cuando esta se inicia. Es la 'puerta principal' visual de tu app. Si esta propiedad está definida, tendrá prioridad sobre `initialRoute` para la pantalla inicial.",
+      "ejemplo_propiedad": "MaterialApp(\n  home: const MyHomePage(), // Define MyHomePage como la pantalla de inicio\n)"
+    },
+    {
+      "nombre": "title",
+      "tipo": "String",
+      "descripcion_extendida": "Un título descriptivo para la aplicación. Este título es utilizado por el sistema operativo (ej. en el selector de tareas recientes en Android o el app switcher en iOS) para identificar tu aplicación.",
+      "ejemplo_propiedad": "MaterialApp(\n  title: 'Mi Gran Aplicación',\n  home: const MyHomePage(),\n)"
+    },
+    {
+      "nombre": "theme",
+      "tipo": "ThemeData",
+      "descripcion_extendida": "Define el tema visual global de la aplicación (colores principales, tipografías por defecto, formas de los componentes, etc.). Esto ayuda a mantener una apariencia consistente en toda tu UI.",
+      "ejemplo_propiedad": "MaterialApp(\n  theme: ThemeData(\n    primarySwatch: Colors.teal,\n    appBarTheme: const AppBarTheme(color: Colors.cyan),\n  ),\n  home: const MyHomePage(),\n)"
+    },
+    {
+      "nombre": "routes",
+      "tipo": "Map<String, WidgetBuilder>",
+      "descripcion_extendida": "Un mapa de rutas nombradas que la aplicación puede navegar. Cada entrada en el mapa asocia un nombre de ruta (String, ej. '/settings') con una función constructora de widget. Esto permite una navegación limpia y declarativa entre pantallas.\n\n**Nota Importante:** Si usas `routes`, el widget que se muestra al iniciar la app se define con `initialRoute` (si `home` no está presente).",
+      "ejemplo_propiedad": "MaterialApp(\n  initialRoute: '/',\n  routes: {\n    '/': (context) => const HomeScreen(),\n    '/settings': (context) => const SettingsScreen(),\n  },\n)"
+    },
+    {
+      "nombre": "initialRoute",
+      "tipo": "String",
+      "descripcion_extendida": "La ruta con nombre que se carga primero cuando la aplicación se inicia. Esta propiedad es relevante cuando toda tu navegación se basa en rutas nombradas a través de la propiedad `routes` y no estás usando la propiedad `home`.",
+      "ejemplo_propiedad": "MaterialApp(\n  initialRoute: '/dashboard', // Inicia en la ruta del dashboard\n  routes: { '/dashboard': (context) => const DashboardScreen() },\n)"
+    },
+    {
+      "nombre": "navigatorKey",
+      "tipo": "GlobalKey<NavigatorState>",
+      "descripcion_extendida": "Una clave global opcional para acceder al `Navigator` de la aplicación desde cualquier parte del árbol de widgets, incluso fuera del contexto de un widget que conoce el `Navigator` (útil para navegación programática o de servicios).",
+      "ejemplo_propiedad": "final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();\n\nMaterialApp(\n  navigatorKey: navigatorKey,\n  home: Builder(\n    builder: (context) => ElevatedButton(\n      onPressed: () => navigatorKey.currentState?.pushNamed('/settings'),\n      child: const Text('Ir a Ajustes (con GlobalKey)'),\n    ),\n  ),\n  routes: {'/settings': (context) => const SettingsScreen()},\n)"
+    },
+    {
+      "nombre": "debugShowCheckedModeBanner",
+      "tipo": "bool",
+      "descripcion_extendida": "Controla si se muestra la bandera de 'DEBUG' en la esquina superior derecha de la aplicación. Configúrala a `false` para quitarla en producción o al hacer capturas de pantalla limpias.",
+      "ejemplo_propiedad": "MaterialApp(\n  debugShowCheckedModeBanner: false, // Oculta la bandera de DEBUG\n  home: const MyHomePage(),\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Definir el punto de entrada principal de cualquier aplicación Flutter basada en Material Design.",
+    "Configurar el tema visual global (colores, fuentes) para toda la aplicación.",
+    "Gestionar la navegación entre diferentes pantallas de la aplicación a través de rutas nombradas."
+  ],
+  "constructores_comunes": [
+    "MaterialApp()",
+    "MaterialApp.router() (para integración con paquetes de enrutamiento más avanzados)"
+  ],
+  "widgets_relacionados": [
+    "Scaffold (para la estructura de cada pantalla)",
+    "WidgetsApp (el widget padre de MaterialApp para aplicaciones no Material)",
+    "ThemeData (para definir el tema)",
+    "Navigator (gestiona la pila de rutas)"
+  ],
+  "cuando_no_usar": "No uses `MaterialApp` si tu aplicación no va a seguir las directrices de diseño de Material Design (por ejemplo, si estás creando una app con un diseño muy personalizado o una app puramente basada en iOS usando `CupertinoApp`). En ese caso, usarías `WidgetsApp` (la base de `MaterialApp` y `CupertinoApp`) y construirías tu UI desde cero.",
+  "ejemplo_avanzado": "MaterialApp(\n  title: 'Mi App Personalizada',\n  theme: ThemeData(\n    primarySwatch: Colors.blueGrey,\n    brightness: Brightness.light, // Tema claro por defecto\n    textTheme: const TextTheme(\n      headlineLarge: TextStyle(fontSize: 30.0, fontWeight: FontWeight.bold),\n      bodyMedium: TextStyle(fontSize: 16.0, fontFamily: 'Georgia'),\n    ),\n  ),\n  initialRoute: '/',\n  routes: {\n    '/': (context) => const HomeScreen(),\n    '/settings': (context) => const SettingsScreen(),\n    '/productDetail': (context) => const ProductDetailScreen(),\n  },\n  onGenerateRoute: (settings) {\n    // Lógica para rutas dinámicas o no definidas, como pasar argumentos\n    if (settings.name == '/item') {\n      final args = settings.arguments as String; // Ejemplo: pasar un ID de ítem\n      return MaterialPageRoute(builder: (context) => ItemDetailScreen(itemId: args));\n    }\n    // Si la ruta no se encuentra, puedes redirigir o mostrar una página de error\n    return MaterialPageRoute(builder: (context) => const UnknownRouteScreen());\n  },\n  debugShowCheckedModeBanner: false,\n);",
+  "imagen": "assets/MaterialApp.jpg",
+  "ruta": "/Page_MaterialApp"
+},
+
+{
+  "nombre": "Container",
+  "descripcion": "Un widget flexible y versátil que se utiliza para contener, dimensionar, posicionar y estilizar otros widgets. Es como una caja en la que puedes meter otros elementos, controlando su tamaño, color, bordes, relleno (padding), margen (margin) y sombras. Es fundamental para agrupar elementos y darles un aspecto visual específico.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "child",
+      "tipo": "Widget",
+      "descripcion_extendida": "El único widget que contendrá el `Container`. Este widget se colocará dentro del área del `Container` y respetará su padding y alineación. Si no se especifica, el `Container` actuará como un espacio vacío estilizado.",
+      "ejemplo_propiedad": "Container(\n  color: Colors.lightGreen.shade100,\n  child: Text('Hola desde el Container'),\n)"
+    },
+    {
+      "nombre": "width",
+      "tipo": "double",
+      "descripcion_extendida": "Define el ancho fijo del contenedor. Si no se especifica, el `Container` intentará ser tan ancho como su padre si no tiene un `child`, o tan ancho como su `child` si lo tiene y no hay otras restricciones.",
+      "ejemplo_propiedad": "Container(\n  width: 150.0,\n  height: 100.0,\n  color: Colors.orange.shade200,\n  child: Center(child: Text('150x100')), \n)"
+    },
+    {
+      "nombre": "height",
+      "tipo": "double",
+      "descripcion_extendida": "Define el alto fijo del contenedor. Similar al `width`, si no se especifica, se ajustará al padre o al `child` según el contexto.",
+      "ejemplo_propiedad": "Container(\n  width: 100.0,\n  height: 200.0,\n  color: Colors.purple.shade100,\n  child: Center(child: Text('100x200')), \n)"
+    },
+    {
+      "nombre": "color",
+      "tipo": "Color",
+      "descripcion_extendida": "Establece el color de fondo del contenedor. **Importante:** Si usas la propiedad `decoration` para estilos más complejos, no puedes usar `color` directamente aquí; el color debe ir dentro de la `decoration` (ej. en `BoxDecoration`).",
+      "ejemplo_propiedad": "Container(\n  color: Colors.red,\n  child: Text('Fondo Rojo'),\n)"
+    },
+    {
+      "nombre": "padding",
+      "tipo": "EdgeInsetsGeometry",
+      "descripcion_extendida": "El espacio interno entre el borde del `Container` y su `child`. Este espacio 'empuja' el contenido hacia adentro desde los bordes del contenedor. Se define usando `EdgeInsets` (ej. `EdgeInsets.all`, `EdgeInsets.only`).",
+      "ejemplo_propiedad": "Container(\n  color: Colors.cyan.shade100,\n  padding: EdgeInsets.all(20.0), // 20px de relleno en todos los lados\n  child: Text('Texto con padding'),\n)"
+    },
+    {
+      "nombre": "margin",
+      "tipo": "EdgeInsetsGeometry",
+      "descripcion_extendida": "El espacio externo entre el `Container` y otros widgets que lo rodean. Este espacio 'separa' el contenedor de sus vecinos. También se define usando `EdgeInsets`.",
+      "ejemplo_propiedad": "Container(\n  color: Colors.yellow.shade100,\n  margin: EdgeInsets.only(top: 10.0, bottom: 10.0), // Margen solo arriba y abajo\n  child: Text('Texto con margin'),\n)"
+    },
+    {
+      "nombre": "decoration",
+      "tipo": "Decoration",
+      "descripcion_extendida": "Permite personalizar el aspecto visual del contenedor de formas más avanzadas que solo el `color`. Puedes definir bordes, esquinas redondeadas, gradientes, imágenes de fondo y sombras de caja. Si usas `decoration`, el `color` del `Container` debe ir dentro de la `BoxDecoration`.",
+      "ejemplo_propiedad": "Container(\n  decoration: BoxDecoration(\n    color: Colors.blueAccent,\n    borderRadius: BorderRadius.circular(10.0), // Esquinas redondeadas\n    border: Border.all(color: Colors.black, width: 2), // Borde\n    boxShadow: [\n      BoxShadow(\n        color: Colors.black.withOpacity(0.3),\n        spreadRadius: 3,\n        blurRadius: 5,\n        offset: Offset(0, 3),\n      ),\n    ],\n  ),\n  child: Text('Caja decorada'),\n)"
+    },
+    {
+      "nombre": "alignment",
+      "tipo": "AlignmentGeometry",
+      "descripcion_extendida": "Cómo se alinea el `child` dentro del `Container` si el `Container` es más grande que su `child`. Por defecto, el `child` se alinea al centro (`Alignment.center`). Puedes especificar otras alineaciones como `Alignment.topLeft`, `Alignment.bottomRight`, etc.",
+      "ejemplo_propiedad": "Container(\n  width: 200,\n  height: 200,\n  color: Colors.grey.shade300,\n  alignment: Alignment.bottomRight, // Alinea el hijo a la esquina inferior derecha\n  child: Text('Aquí abajo'),\n)"
+    },
+    {
+      "nombre": "constraints",
+      "tipo": "BoxConstraints",
+      "descripcion_extendida": "Define restricciones de tamaño adicionales para el `Container`, como un ancho o alto mínimo/máximo. Esto te da un control más fino sobre cómo el `Container` se ajusta a los límites de su padre o de su contenido. Por ejemplo, `BoxConstraints.expand()` hará que el Container ocupe todo el espacio disponible.",
+      "ejemplo_propiedad": "Container(\n  constraints: BoxConstraints.expand(width: 100, height: 100), // Fuerza un tamaño exacto\n  color: Colors.pink.shade100,\n  child: Text('Tamaño fijo'),\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Crear tarjetas, paneles o secciones con estilos personalizados (colores de fondo, bordes, sombras).",
+    "Establecer dimensiones específicas (ancho, alto) para un widget o un espacio.",
+    "Añadir espaciado interno (padding) o externo (margin) alrededor de los elementos.",
+    "Agrupar múltiples widgets para aplicarles un estilo o un posicionamiento conjunto."
+  ],
+  "constructores_comunes": [
+    "Container()"
+  ],
+  "widgets_relacionados": [
+    "SizedBox (para espacios vacíos con tamaño fijo)",
+    "Padding (solo para aplicar relleno)",
+    "DecoratedBox (si solo necesitas la decoración)",
+    "Align (si solo necesitas alinear un hijo)",
+    "Center (si solo necesitas centrar un hijo)"
+  ],
+  "cuando_no_usar": "Aunque `Container` es muy versátil, no lo uses si solo necesitas una funcionalidad específica que otro widget hace de forma más eficiente y ligera. Por ejemplo:\n- Si solo necesitas espacio vacío, usa `SizedBox`.\n- Si solo necesitas aplicar padding, usa `Padding`.\n- Si solo necesitas centrar un widget, usa `Center`.\n- Si solo necesitas un color de fondo, `ColoredBox` es más simple.\nUsar `Container` por defecto para todo puede añadir un ligero overhead si sus capacidades avanzadas no son necesarias.",
+  "ejemplo_avanzado": "Container(\n  width: double.infinity, // Ocupa todo el ancho disponible\n  height: 200.0,\n  margin: const EdgeInsets.all(16.0),\n  padding: const EdgeInsets.all(20.0),\n  decoration: BoxDecoration(\n    color: Colors.white,\n    borderRadius: BorderRadius.circular(15.0),\n    border: Border.all(color: Colors.blueGrey, width: 1.5),\n    boxShadow: [\n      BoxShadow(\n        color: Colors.grey.withOpacity(0.6),\n        spreadRadius: 4,\n        blurRadius: 10,\n        offset: const Offset(0, 5),\n      ),\n    ],\n    gradient: const LinearGradient(\n      begin: Alignment.topLeft,\n      end: Alignment.bottomRight,\n      colors: [Colors.white, Colors.blue.shade50],\n    ),\n  ),\n  child: Column(\n    mainAxisAlignment: MainAxisAlignment.center,\n    children: [\n      const Text(\n        '¡Bienvenido a tu Tarjeta Personalizada!',\n        style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.indigo),\n        textAlign: TextAlign.center,\n      ),\n      const SizedBox(height: 10),\n      Text(\n        'Este es un ejemplo de un Container avanzado con múltiples propiedades de diseño aplicadas.',\n        textAlign: TextAlign.center,\n        style: TextStyle(fontSize: 14, color: Colors.grey[700]),\n      ),\n      const SizedBox(height: 15),\n      ElevatedButton.icon(\n        onPressed: () { /* Acción del botón */ },\n        icon: const Icon(Icons.info_outline),\n        label: const Text('Más Información'),\n        style: ElevatedButton.styleFrom(backgroundColor: Colors.indigo.shade400, foregroundColor: Colors.white),\n      ),\n    ],\n  ),\n);",
+  "imagen": "assets/Container.jpg",
+  "ruta": "/Page_Container"
+},
+
+{
+  "nombre": "Column",
+  "descripcion": "Un widget de diseño que organiza sus `children` (hijos) en una secuencia **vertical**. Es fundamental para construir interfaces donde los elementos se apilan uno encima del otro, adaptándose al espacio disponible y a la alineación que definas.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "children",
+      "tipo": "List<Widget>",
+      "descripcion_extendida": "La lista de widgets que se mostrarán verticalmente, uno debajo del otro, dentro de la columna. Siempre se espera una lista de widgets, incluso si es solo uno.",
+      "ejemplo_propiedad": "Column(\n  children: [\n    Text('Primer ítem'),\n    Text('Segundo ítem'),\n  ],\n)"
+    },
+    {
+      "nombre": "mainAxisAlignment",
+      "tipo": "MainAxisAlignment",
+      "descripcion_extendida": "Define cómo se alinean los hijos a lo largo del **eje principal (vertical)** de la columna. Este eje va de arriba a abajo. Las opciones comunes son:\n    - **`MainAxisAlignment.start`**: Alinea los hijos al principio del eje (arriba).\n    - **`MainAxisAlignment.center`**: Centra los hijos en el eje.\n    - **`MainAxisAlignment.end`**: Alinea los hijos al final del eje (abajo).\n    - **`MainAxisAlignment.spaceBetween`**: Distribuye el espacio sobrante uniformemente entre los hijos, con el primer hijo al principio y el último al final.\n    - **`MainAxisAlignment.spaceAround`**: Distribuye el espacio sobrante uniformemente alrededor de cada hijo (incluyendo espacio antes del primero y después del último).\n    - **`MainAxisAlignment.spaceEvenly`**: Distribuye el espacio sobrante uniformemente tanto entre los hijos como antes del primero y después del último, resultando en espacios del mismo tamaño.",
+      "ejemplo_propiedad": "Column(\n  mainAxisAlignment: MainAxisAlignment.center, // Centra los hijos verticalmente\n  children: const [\n    Icon(Icons.star),\n    Text('Estrellas'),\n  ],\n)"
+    },
+    {
+      "nombre": "crossAxisAlignment",
+      "tipo": "CrossAxisAlignment",
+      "descripcion_extendida": "Define cómo se alinean los hijos a lo largo del **eje transversal (horizontal)** de la columna. Este eje va de izquierda a derecha. Las opciones comunes son:\n    - **`CrossAxisAlignment.start`**: Alinea los hijos al principio del eje transversal (izquierda).\n    - **`CrossAxisAlignment.center`**: Centra los hijos en el eje transversal.\n    - **`CrossAxisAlignment.end`**: Alinea los hijos al final del eje transversal (derecha).\n    - **`CrossAxisAlignment.stretch`**: Estira los hijos para que llenen todo el espacio disponible a lo largo del eje transversal. Muy útil para que los hijos ocupen todo el ancho de la `Column`.\n    - **`CrossAxisAlignment.baseline`**: Alinea los hijos en base a su línea base de texto (útil cuando se mezclan textos de diferentes tamaños, requiere `textBaseline`).",
+      "ejemplo_propiedad": "Column(\n  crossAxisAlignment: CrossAxisAlignment.stretch, // Estira los hijos horizontalmente\n  children: [\n    Container(height: 50, color: Colors.red),\n    Container(height: 50, color: Colors.blue),\n  ],\n)"
+    },
+    {
+      "nombre": "mainAxisSize",
+      "tipo": "MainAxisSize",
+      "descripcion_extendida": "Determina cuánto espacio debe ocupar la columna a lo largo de su **eje principal (vertical)**. Las opciones son:\n    - **`MainAxisSize.max`**: La `Column` intentará ocupar todo el espacio vertical disponible (por defecto).\n    - **`MainAxisSize.min`**: La `Column` ocupará solo el espacio vertical mínimo necesario para contener a sus `children`. Útil si no quieres que ocupe todo el alto disponible.",
+      "ejemplo_propiedad": "Column(\n  mainAxisSize: MainAxisSize.min, // La columna solo ocupará el alto necesario\n  children: const [\n    Text('Texto Corto'),\n    Text('Otro Texto Más Corto'),\n  ],\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Crear listas de elementos apilados (menus, formularios).",
+    "Organizar componentes de una tarjeta verticalmente (imagen arriba, texto abajo).",
+    "Estructurar la disposición principal de una sección de la UI."
+  ],
+  "constructores_comunes": [
+    "Column()"
+  ],
+  "widgets_relacionados": [
+    "Row (para disposición horizontal)",
+    "Expanded (para dar espacio flexible a un hijo en la Column/Row)",
+    "Flexible (similar a Expanded, pero con menos rigidez)",
+    "ListView (para listas desplazables de muchos elementos)"
+  ],
+  "cuando_no_usar": "No uses `Column` para listas muy largas o infinitas, ya que carga y renderiza *todos* sus hijos a la vez, lo que puede afectar seriamente el rendimiento. Para eso, es mucho más eficiente usar widgets como `ListView.builder` o `CustomScrollView` que renderizan elementos a medida que son necesarios (visibles en pantalla). Tampoco la uses si necesitas que los elementos se superpongan (usa `Stack`) o si solo tienes un hijo y no necesitas el manejo de alineación que una `Column` ofrece (un `Container` o el widget directamente sería más simple).",
+  "ejemplo_avanzado": "Column(\n  mainAxisAlignment: MainAxisAlignment.spaceAround, // Espacio alrededor de los elementos\n  crossAxisAlignment: CrossAxisAlignment.center, // Centra horizontalmente los elementos\n  children: <Widget>[\n    Container(\n      padding: const EdgeInsets.all(12),\n      color: Colors.blue.shade100,\n      child: const Text(\n        'Título de Sección', \n        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),\n      ),\n    ),\n    const SizedBox(height: 15), // Espacio fijo\n    Row(\n      mainAxisAlignment: MainAxisAlignment.spaceEvenly,\n      children: [\n        Expanded(\n          child: Image.network(\n            'https://via.placeholder.com/100', // Imagen 1\n            height: 100, fit: BoxFit.cover\n          )\n        ),\n        const SizedBox(width: 10),\n        Expanded(\n          child: Image.network(\n            'https://via.placeholder.com/100', // Imagen 2\n            height: 100, fit: BoxFit.cover\n          )\n        ),\n      ],\n    ),\n    const SizedBox(height: 15),\n    Padding(\n      padding: const EdgeInsets.symmetric(horizontal: 20.0),\n      child: ElevatedButton(\n        onPressed: () {},\n        child: const Text('Botón de Acción'),\n        style: ElevatedButton.styleFrom(\n          minimumSize: const Size(double.infinity, 50), // Botón que ocupa todo el ancho\n        ),\n      ),\n    ),\n  ],\n);",
+  "imagen": "assets/Column.jpg",
+  "ruta": "/Page_Column"
+  
+},{
+  "nombre": "Row",
+  "descripcion": "Un widget de diseño que organiza sus `children` (hijos) en una secuencia **horizontal**. Es esencial para construir interfaces donde los elementos se colocan uno al lado del otro, adaptándose al espacio disponible y a la alineación que definas.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "children",
+      "tipo": "List<Widget>",
+      "descripcion_extendida": "La lista de widgets que se mostrarán horizontalmente, uno junto al otro, dentro de la fila. Siempre se espera una lista de widgets, incluso si es solo uno.",
+      "ejemplo_propiedad": "Row(\n  children: [\n    Text('Izquierda'),\n    Text('Derecha'),\n  ],\n)"
+    },
+    {
+      "nombre": "mainAxisAlignment",
+      "tipo": "MainAxisAlignment",
+      "descripcion_extendida": "Define cómo se alinean los hijos a lo largo del **eje principal (horizontal)** de la fila. Este eje va de izquierda a derecha. Las opciones comunes son:\n    - **`MainAxisAlignment.start`**: Alinea los hijos al principio del eje (izquierda).\n    - **`MainAxisAlignment.center`**: Centra los hijos en el eje.\n    - **`MainAxisAlignment.end`**: Alinea los hijos al final del eje (derecha).\n    - **`MainAxisAlignment.spaceBetween`**: Distribuye el espacio sobrante uniformemente entre los hijos, con el primer hijo al principio y el último al final.\n    - **`MainAxisAlignment.spaceAround`**: Distribuye el espacio sobrante uniformemente alrededor de cada hijo (incluyendo espacio antes del primero y después del último).\n    - **`MainAxisAlignment.spaceEvenly`**: Distribuye el espacio sobrante uniformemente tanto entre los hijos como antes del primero y después del último, resultando en espacios del mismo tamaño.",
+      "ejemplo_propiedad": "Row(\n  mainAxisAlignment: MainAxisAlignment.spaceAround, // Distribuye los hijos con espacio alrededor\n  children: const [\n    Icon(Icons.thumb_up),\n    Text('Me gusta'),\n    Icon(Icons.comment),\n  ],\n)"
+    },
+    {
+      "nombre": "crossAxisAlignment",
+      "tipo": "CrossAxisAlignment",
+      "descripcion_extendida": "Define cómo se alinean los hijos a lo largo del **eje transversal (vertical)** de la fila. Este eje va de arriba a abajo. Las opciones comunes son:\n    - **`CrossAxisAlignment.start`**: Alinea los hijos al principio del eje transversal (arriba).\n    - **`CrossAxisAlignment.center`**: Centra los hijos en el eje transversal (por defecto si no se especifica y no hay `Expanded`/`Flexible`).\n    - **`CrossAxisAlignment.end`**: Alinea los hijos al final del eje transversal (abajo).\n    - **`CrossAxisAlignment.stretch`**: Estira los hijos para que llenen todo el espacio disponible a lo largo del eje transversal (ocupando todo el alto de la `Row`).\n    - **`CrossAxisAlignment.baseline`**: Alinea los hijos en base a su línea base de texto (útil cuando se mezclan textos de diferentes tamaños, requiere `textBaseline`).",
+      "ejemplo_propiedad": "Row(\n  crossAxisAlignment: CrossAxisAlignment.center, // Centra los hijos verticalmente\n  children: [\n    const Text('Título Grande', style: TextStyle(fontSize: 30)),\n    const SizedBox(width: 10),\n    const Text('Subtítulo Pequeño'),\n  ],\n)"
+    },
+    {
+      "nombre": "mainAxisSize",
+      "tipo": "MainAxisSize",
+      "descripcion_extendida": "Determina cuánto espacio debe ocupar la fila a lo largo de su **eje principal (horizontal)**. Las opciones son:\n    - **`MainAxisSize.max`**: La `Row` intentará ocupar todo el espacio horizontal disponible (por defecto).\n    - **`MainAxisSize.min`**: La `Row` ocupará solo el espacio horizontal mínimo necesario para contener a sus `children`. Útil si no quieres que ocupe todo el ancho disponible.",
+      "ejemplo_propiedad": "Row(\n  mainAxisSize: MainAxisSize.min, // La fila solo ocupará el ancho necesario\n  children: const [\n    Chip(label: Text('Etiqueta 1')),\n    Chip(label: Text('Etiqueta 2')),\n  ],\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Crear barras de botones o iconos.",
+    "Diseñar la disposición de elementos dentro de una tarjeta o lista (ej. icono, título, subtítulo).",
+    "Organizar componentes de un formulario horizontalmente.",
+    "Alinear elementos de una barra de navegación inferior."
+  ],
+  "constructores_comunes": [
+    "Row()"
+  ],
+  "widgets_relacionados": [
+    "Column (para disposición vertical)",
+    "Expanded (para dar espacio flexible a un hijo en la Row/Column)",
+    "Flexible (similar a Expanded, pero con menos rigidez)",
+    "Wrap (para elementos que se envuelven a la siguiente línea si no hay espacio)",
+    "Spacer (para crear espacio flexible entre elementos)"
+  ],
+  "cuando_no_usar": "No uses `Row` si esperas que el contenido pueda exceder el ancho de la pantalla y necesites que se envuelva automáticamente a la siguiente línea (para eso, usa `Wrap`). Tampoco es adecuada para listas desplazables muy largas de elementos horizontales si no se envuelve en un `SingleChildScrollView` o `ListView.builder` con `scrollDirection: Axis.horizontal`.",
+  "ejemplo_avanzado": "Row(\n  mainAxisAlignment: MainAxisAlignment.spaceBetween, // Espacio entre inicio, medio y fin\n  crossAxisAlignment: CrossAxisAlignment.end, // Alinea elementos a la parte inferior verticalmente\n  children: <Widget>[\n    const Icon(Icons.arrow_back_ios, size: 30, color: Colors.blueGrey), // Icono de navegación\n    Expanded(\n      child: Column(\n        mainAxisSize: MainAxisSize.min,\n        children: [\n          const Text(\n            'Título del Contenido',\n            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),\n            overflow: TextOverflow.ellipsis,\n          ),\n          const SizedBox(height: 5),\n          Text(\n            'Aquí va una descripción más larga que podría ser truncada.',\n            style: TextStyle(fontSize: 14, color: Colors.grey[600]),\n            maxLines: 1, // Limita a una línea\n            overflow: TextOverflow.ellipsis, // Muestra '...' si se desborda\n          ),\n        ],\n      ),\n    ),\n    const SizedBox(width: 10),\n    Container(\n      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),\n      decoration: BoxDecoration(\n        color: Colors.green.shade100,\n        borderRadius: BorderRadius.circular(15),\n      ),\n      child: const Text(\n        'Activo',\n        style: TextStyle(color: Colors.green.shade800, fontWeight: FontWeight.bold),\n      ),\n    ),\n  ],\n);",
+  "imagen": "assets/Row.jpg",
+  "ruta": "/Page_Row"
+},
+
+{
+  "nombre": "Text",
+  "descripcion": "Un widget fundamental en Flutter que se utiliza para mostrar una cadena de texto inmutable en la interfaz de usuario. Es la forma más básica y común de presentar información textual al usuario.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "data",
+      "tipo": "String",
+      "descripcion_extendida": "La cadena de texto (el contenido real) que el widget `Text` va a mostrar. Es un parámetro posicional y, por lo tanto, el más importante del widget.",
+      "ejemplo_propiedad": "Text('¡Hola, Flutter!')"
+    },
+    {
+      "nombre": "style",
+      "tipo": "TextStyle",
+      "descripcion_extendida": "Define el estilo visual completo del texto. Acepta un objeto `TextStyle` que es una clase de configuración clave. Con `TextStyle` puedes personalizar ampliamente la apariencia del texto, incluyendo:\n    - **`color`**: El color del texto (ej. `Colors.blue`).\n    - **`fontSize`**: El tamaño de la fuente en píxeles lógicos (ej. `24.0`).\n    - **`fontWeight`**: El grosor de la fuente (ej. `FontWeight.bold` para negrita, `FontWeight.w700`).\n    - **`fontStyle`**: El estilo de la fuente (ej. `FontStyle.italic` para cursiva, `FontStyle.normal`).\n    - **`fontFamily`**: La familia de la fuente (el tipo de letra, ej. 'Roboto', 'OpenSans', o fuentes personalizadas).\n    - **`decoration`**: Decoraciones como `TextDecoration.underline` (subrayado), `TextDecoration.lineThrough` (tachado), `TextDecoration.overline`.\n    - **`decorationColor`**: El color de la decoración.\n    - **`decorationStyle`**: El estilo de la línea de decoración (ej. `TextDecorationStyle.wavy`).\n    - **`letterSpacing`**: El espacio horizontal adicional entre los caracteres del texto.\n    - **`wordSpacing`**: El espacio horizontal adicional entre las palabras del texto.\n    - **`height`**: La altura de la línea de texto, como un multiplicador del `fontSize` (ej. `1.5` para 150% de la altura normal).\n    - **`shadows`**: Una lista de sombras para aplicar al texto (`List<Shadow>`), cada una con su `offset`, `blurRadius` y `color`.\n    - **`background`**: Un `Paint` para dibujar un color o patrón de fondo *detrás* del texto (no el fondo del widget `Text` en sí).\n\n    Es inmutable; para modificar un estilo, creas una nueva instancia (`.copyWith()`). Hereda valores del `Theme` de la aplicación.",
+      "ejemplo_propiedad": "Text(\n  'Texto Estilizado',\n  style: TextStyle(\n    color: Colors.deepPurple,\n    fontSize: 22.0,\n    fontWeight: FontWeight.bold,\n    fontStyle: FontStyle.italic,\n    decoration: TextDecoration.underline,\n    decorationColor: Colors.red,\n    decorationStyle: TextDecorationStyle.wavy,\n  ),\n)"
+    },
+    {
+      "nombre": "textAlign",
+      "tipo": "TextAlign",
+      "descripcion_extendida": "Define cómo se alinea el texto horizontalmente dentro del espacio disponible que ocupa el widget `Text`. Las opciones incluyen `TextAlign.left`, `TextAlign.center`, `TextAlign.right`, `TextAlign.justify` (para texto justificado en bloques).",
+      "ejemplo_propiedad": "Text(\n  'Este texto está centrado.',\n  textAlign: TextAlign.center,\n)"
+    },
+    {
+      "nombre": "maxLines",
+      "tipo": "int",
+      "descripcion_extendida": "El número máximo de líneas que el texto puede ocupar. Si el texto excede este límite, se aplicará el comportamiento definido por la propiedad `overflow`.",
+      "ejemplo_propiedad": "Text(\n  'Un texto muy largo que se limitará a una sola línea.',\n  maxLines: 1,\n  overflow: TextOverflow.ellipsis,\n)"
+    },
+    {
+      "nombre": "overflow",
+      "tipo": "TextOverflow",
+      "descripcion_extendida": "Determina cómo se maneja el texto si excede el espacio disponible o el `maxLines` especificado. Las opciones comunes son:\n    - **`TextOverflow.ellipsis`**: Añade puntos suspensivos (...) al final del texto.\n    - **`TextOverflow.fade`**: Difumina el final del texto.\n    - **`TextOverflow.clip`**: Simplemente recorta el texto sin añadir ningún indicador.\n    - **`TextOverflow.visible`**: El texto se desborda y puede renderizarse fuera de su caja (a menudo no deseado).",
+      "ejemplo_propiedad": "Text(\n  'Mucho texto para una pequeña área. Mucho texto para una pequeña área.',\n  maxLines: 1,\n  overflow: TextOverflow.fade,\n)"
+    },
+    {
+      "nombre": "textDirection",
+      "tipo": "TextDirection",
+      "descripcion_extendida": "La dirección en la que se renderiza el texto (de izquierda a derecha o de derecha a izquierda). Es crucial para el soporte de idiomas RTL (Right-To-Left) como el árabe o el hebreo.\n    - **`TextDirection.ltr`**: Izquierda a derecha (por defecto en la mayoría de los casos).\n    - **`TextDirection.rtl`**: Derecha a izquierda.",
+      "ejemplo_propiedad": "Text(\n  'Texto de prueba en RTL',\n  textDirection: TextDirection.rtl,\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Mostrar cualquier tipo de información textual en la UI, como títulos, párrafos, etiquetas, descripciones.",
+    "Etiquetas para botones, campos de entrada o iconos.",
+    "Mensajes informativos o de estado para el usuario."
+  ],
+  "constructores_comunes": [
+    "Text()",
+    "Text.rich() (para mostrar texto con múltiples estilos dentro de la misma cadena)"
+  ],
+  "widgets_relacionados": [
+    "RichText (cuando necesitas mezclar muchos estilos diferentes en un solo bloque de texto o aplicar gestos a partes específicas del texto).",
+    "DefaultTextStyle (para establecer un estilo de texto predeterminado que los widgets `Text` hijos pueden heredar).",
+    "TextField (para entrada de texto editable por el usuario).",
+    "SelectableText (para texto que el usuario puede seleccionar y copiar)."
+  ],
+  "cuando_no_usar": "No uses `Text` si necesitas que el usuario pueda introducir o modificar el texto (para eso, `TextField` es la opción). Tampoco lo uses para texto que requiera interactividad avanzada en partes específicas (ej. un link clicable dentro de un párrafo), donde `Text.rich` o `RichText` serían más adecuados.",
+  "ejemplo_avanzado": "Text.rich(\n  TextSpan(\n    text: 'Bienvenido a ', // Texto por defecto\n    style: TextStyle(fontSize: 18, color: Colors.black),\n    children: <TextSpan>[\n      TextSpan(\n        text: 'Flutter ', \n        style: TextStyle(fontWeight: FontWeight.bold, color: Colors.blueAccent),\n      ),\n      TextSpan(\n        text: 'Development.', \n        style: TextStyle(fontStyle: FontStyle.italic, color: Colors.green),\n      ),\n      TextSpan(\n        text: '\\nHaz clic ', // Salto de línea\n      ),\n      TextSpan(\n        text: 'aquí',\n        style: TextStyle(\n          color: Colors.red,\n          decoration: TextDecoration.underline,\n        ),\n        recognizer: TapGestureRecognizer()\n          ..onTap = () {\n            print('Link de \"aquí\" presionado!');\n            // Aquí podrías navegar a una URL o pantalla\n          },\n      ),\n      TextSpan(\n        text: ' para más información.',\n      ),\n    ],\n  ),\n  textAlign: TextAlign.center,\n  maxLines: 5,\n  overflow: TextOverflow.ellipsis,\n);",
+  "imagen": "assets/Text.jpg",
+  "ruta": "/Page_Text"
+},
+
+{
+  "nombre": "SingleChildScrollView",
+  "descripcion": "Un widget que hace que su único `child` (hijo) sea desplazable. Es ideal cuando tienes contenido que podría exceder el tamaño de la pantalla, como un formulario largo, una página de detalles o un texto extenso, y necesitas que el usuario pueda desplazarse para ver todo el contenido. A diferencia de `ListView`, solo maneja un único hijo.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "child",
+      "tipo": "Widget",
+      "descripcion_extendida": "El único widget que será desplazable. Puede ser cualquier widget, pero a menudo es un `Column` o un `Row` que contiene a su vez múltiples widgets, los cuales colectivamente exceden el espacio de la pantalla.",
+      "ejemplo_propiedad": "SingleChildScrollView(\n  child: Column(\n    children: [\n      // ... widgets que pueden exceder la pantalla\n    ],\n  ),\n)"
+    },
+    {
+      "nombre": "scrollDirection",
+      "tipo": "Axis",
+      "descripcion_extendida": "Define la dirección en la que el contenido se puede desplazar. Por defecto es `Axis.vertical` (desplazamiento de arriba a abajo). Puedes cambiarlo a `Axis.horizontal` para un desplazamiento de izquierda a derecha.",
+      "ejemplo_propiedad": "SingleChildScrollView(\n  scrollDirection: Axis.horizontal, // Habilita el desplazamiento horizontal\n  child: Row(\n    children: [\n      Container(width: 200, height: 100, color: Colors.red),\n      Container(width: 200, height: 100, color: Colors.blue),\n    ],\n  ),\n)"
+    },
+    {
+      "nombre": "padding",
+      "tipo": "EdgeInsetsGeometry",
+      "descripcion_extendida": "El espacio vacío que se añade alrededor del `child` dentro del área de desplazamiento. Esto es útil para que el contenido no se pegue a los bordes del área de desplazamiento. Se define usando `EdgeInsets`.",
+      "ejemplo_propiedad": "SingleChildScrollView(\n  padding: const EdgeInsets.all(20.0), // Añade 20px de relleno alrededor del contenido\n  child: Text('Contenido con padding desplazable'),\n)"
+    },
+    {
+      "nombre": "physics",
+      "tipo": "ScrollPhysics",
+      "descripcion_extendida": "Determina cómo se comporta el desplazamiento. Por defecto, adapta la física al sistema operativo (ej. efecto de rebote en iOS, efecto de sobre-desplazamiento en Android). Puedes usar `NeverScrollableScrollPhysics()` para deshabilitar el desplazamiento, o `BouncingScrollPhysics()` para forzar el rebote en todas las plataformas.",
+      "ejemplo_propiedad": "SingleChildScrollView(\n  physics: const BouncingScrollPhysics(), // Fuerza el efecto de rebote al final del desplazamiento\n  child: Text('Contenido con física de rebote'),\n)"
+    },
+    {
+      "nombre": "controller",
+      "tipo": "ScrollController",
+      "descripcion_extendida": "Un controlador opcional que te permite controlar programáticamente la posición de desplazamiento (ej. desplazarse a una posición específica, leer la posición actual) o escuchar eventos de desplazamiento.",
+      "ejemplo_propiedad": "final ScrollController _scrollController = ScrollController();\n\n// En tu widget:\nSingleChildScrollView(\n  controller: _scrollController,\n  child: Column(\n    children: [\n      // ... contenido\n      ElevatedButton(\n        onPressed: () => _scrollController.animateTo(\n          _scrollController.position.maxScrollExtent, // Desplazarse al final\n          duration: const Duration(seconds: 1),\n          curve: Curves.easeOut,\n        ),\n        child: const Text('Ir al Final'),\n      ),\n    ],\n  ),\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Hacer que formularios largos sean desplazables.",
+    "Permitir el desplazamiento en pantallas de detalles de productos o perfiles de usuario que pueden tener mucho contenido.",
+    "Cuando el contenido es dinámico y podría exceder el tamaño de la pantalla en diferentes dispositivos o con diferentes datos."
+  ],
+  "constructores_comunes": [
+    "SingleChildScrollView()"
+  ],
+  "widgets_relacionados": [
+    "Column (usado frecuentemente como hijo para organizar verticalmente)",
+    "Row (usado como hijo si `scrollDirection` es horizontal)",
+    "ListView (para listas de elementos optimizadas con desplazamiento, que construyen elementos bajo demanda)",
+    "CustomScrollView (para efectos de desplazamiento más avanzados y combinados)",
+    "Scrollbar (para añadir una barra de desplazamiento visual)"
+  ],
+  "cuando_no_usar": "No uses `SingleChildScrollView` para listas largas o infinitas de elementos (`ListView` es mucho más eficiente, ya que solo renderiza los elementos que son visibles en pantalla). `SingleChildScrollView` renderiza *todo* su `child` a la vez, lo que puede causar problemas de rendimiento si el contenido es excesivamente grande o complejo.",
+  "ejemplo_avanzado": "SingleChildScrollView(\n  physics: const AlwaysScrollableScrollPhysics(), // Siempre permite el desplazamiento, incluso si el contenido no excede la pantalla\n  padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),\n  child: Column(\n    crossAxisAlignment: CrossAxisAlignment.start,\n    children: <Widget>[\n      const Text(\n        'Título de la Página Desplazable',\n        style: TextStyle(fontSize: 28, fontWeight: FontWeight.bold, color: Colors.blueGrey),\n      ),\n      const SizedBox(height: 20),\n      Image.network(\n        'https://picsum.photos/400/250', \n        fit: BoxFit.cover,\n      ),\n      const SizedBox(height: 20),\n      const Text(\n        'Este es un ejemplo de contenido que puede ser muy largo y necesitar desplazamiento. En una aplicación real, este texto podría ser una descripción detallada de un producto, un artículo de blog, o una sección de términos y condiciones. \\n\\nLa flexibilidad de SingleChildScrollView permite que todo el contenido sea visible sin importar el tamaño de la pantalla, adaptándose a diferentes dispositivos y orientaciones. Puedes incluir otros widgets como imágenes, botones, campos de texto y más dentro de su hijo único.',\n        style: TextStyle(fontSize: 16, height: 1.5),\n        textAlign: TextAlign.justify,\n      ),\n      const SizedBox(height: 20),\n      ElevatedButton.icon(\n        onPressed: () {},\n        icon: const Icon(Icons.download),\n        label: const Text('Descargar PDF'),\n        style: ElevatedButton.styleFrom(minimumSize: const Size(double.infinity, 50)),\n      ),\n      const SizedBox(height: 50), // Espacio extra al final para probar el desplazamiento\n      const Text('Fin del Contenido.', style: TextStyle(fontSize: 18, fontStyle: FontStyle.italic)),\n    ],\n  ),\n);",
+  "imagen": "assets/SingleChildScrollView.jpg",
+  "ruta": "/Page_SingleChildScrollView"
+  
+},{
+  "nombre": "Image",
+  "descripcion": "Un widget que se utiliza para mostrar imágenes en tu aplicación Flutter. Es increíblemente versátil, permitiéndote cargar imágenes desde diferentes fuentes: assets locales (paquete de la app), archivos en el dispositivo, la red (URLs) o incluso memoria.",
+  "propiedades_detalladas": [
+    {
+      "nombre": "image",
+      "tipo": "ImageProvider",
+      "descripcion_extendida": "La fuente de la imagen. No es un `Widget`, sino un `ImageProvider` que sabe cómo cargar los datos de la imagen. Los `ImageProvider` más comunes son:\n    - **`AssetImage`**: Para imágenes empaquetadas con tu app (desde la carpeta `assets`). Requiere que la ruta de la imagen esté declarada en `pubspec.yaml`.\n    - **`NetworkImage`**: Para imágenes cargadas desde una URL de internet.\n    - **`FileImage`**: Para imágenes cargadas desde un archivo en el sistema de archivos del dispositivo.\n    - **`MemoryImage`**: Para imágenes cargadas desde un `Uint8List` (bytes en memoria).",
+      "ejemplo_propiedad": "Image(\n  image: AssetImage('assets/my_local_image.png'),\n)\n\nImage(\n  image: NetworkImage('https://picsum.photos/250/200'),\n)"
+    },
+    {
+      "nombre": "width",
+      "tipo": "double",
+      "descripcion_extendida": "Define el ancho deseado de la imagen en píxeles lógicos. Si no se especifica, la imagen se dimensionará automáticamente según sus restricciones parentales o su tamaño intrínseco.",
+      "ejemplo_propiedad": "Image(\n  image: NetworkImage('https://picsum.photos/250/200'),\n  width: 100.0,\n)"
+    },
+    {
+      "nombre": "height",
+      "tipo": "double",
+      "descripcion_extendida": "Define el alto deseado de la imagen en píxeles lógicos. Similar al `width`, si no se especifica, el alto se ajustará automáticamente.",
+      "ejemplo_propiedad": "Image(\n  image: NetworkImage('https://picsum.photos/250/200'),\n  height: 150.0,\n)"
+    },
+    {
+      "nombre": "fit",
+      "tipo": "BoxFit",
+      "descripcion_extendida": "Determina cómo se debe escalar la imagen para encajar en el espacio asignado por `width` y `height` o por sus restricciones parentales. Opciones comunes:\n    - **`BoxFit.cover`**: Escala la imagen uniformemente para que cubra completamente la caja, recortando cualquier parte que no quepa. Ideal para fondos o miniaturas.\n    - **`BoxFit.contain`**: Escala la imagen uniformemente para que quepa completamente dentro de la caja, dejando espacio vacío si es necesario (manteniendo la relación de aspecto).\n    - **`BoxFit.fill`**: Estira la imagen para que llene completamente la caja, ignorando su relación de aspecto (puede distorsionar la imagen).\n    - **`BoxFit.fitWidth`**: Escala la imagen para que su ancho coincida con el ancho de la caja, ajustando el alto proporcionalmente.\n    - **`BoxFit.fitHeight`**: Escala la imagen para que su alto coincida con el alto de la caja, ajustando el ancho proporcionalmente.\n    - **`BoxFit.none`**: No escala la imagen; simplemente la dibuja en su tamaño original en la parte superior izquierda de la caja (puede desbordarse).",
+      "ejemplo_propiedad": "Image(\n  image: NetworkImage('https://picsum.photos/250/200'),\n  width: 100.0,\n  height: 100.0,\n  fit: BoxFit.cover, // La imagen llenará el espacio de 100x100, recortando si es necesario\n)"
+    },
+    {
+      "nombre": "alignment",
+      "tipo": "AlignmentGeometry",
+      "descripcion_extendida": "Define cómo se alinea la imagen dentro de su espacio asignado si la imagen es más pequeña que la caja después de aplicar `fit`. Por defecto, es `Alignment.center`.",
+      "ejemplo_propiedad": "Image(\n  image: NetworkImage('https://picsum.photos/250/200'),\n  width: 200.0,\n  height: 200.0,\n  fit: BoxFit.contain, // La imagen se ajusta al espacio\n  alignment: Alignment.bottomLeft, // La imagen se alinea a la parte inferior izquierda de la caja\n)"
+    },
+    {
+      "nombre": "color",
+      "tipo": "Color",
+      "descripcion_extendida": "Un color opcional que se mezcla con los píxeles de la imagen. Útil para aplicar tintes o filtros de color a una imagen.",
+      "ejemplo_propiedad": "Image(\n  image: NetworkImage('https://picsum.photos/250/200'),\n  color: Colors.blue.withOpacity(0.5), // Tinte azul semitransparente\n  colorBlendMode: BlendMode.srcATop,\n)"
+    },
+    {
+      "nombre": "errorBuilder",
+      "tipo": "ImageErrorWidgetBuilder",
+      "descripcion_extendida": "Una función opcional que se llama si la imagen no se puede cargar (ej. URL incorrecta, archivo no encontrado). Permite mostrar un widget de reemplazo (ej. un icono de error) en lugar de simplemente fallar silenciosamente.",
+      "ejemplo_propiedad": "Image(\n  image: NetworkImage('https://url.invalida/imagen.jpg'),\n  errorBuilder: (context, error, stackTrace) {\n    return const Icon(Icons.broken_image, size: 50, color: Colors.red);\n  },\n)"
+    },
+    {
+      "nombre": "loadingBuilder",
+      "tipo": "ImageLoadingBuilder",
+      "descripcion_extendida": "Una función opcional que se llama mientras la imagen se está cargando. Permite mostrar un widget de marcador de posición (ej. un `CircularProgressIndicator`) mientras la imagen se descarga de la red o se carga desde el disco.",
+      "ejemplo_propiedad": "Image(\n  image: NetworkImage('https://picsum.photos/250/200'),\n  loadingBuilder: (context, child, loadingProgress) {\n    if (loadingProgress == null) return child;\n    return Center(\n      child: CircularProgressIndicator(\n        value: loadingProgress.expectedTotalBytes != null\n            ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!\n            : null,\n      ),\n    );\n  },\n)"
+    }
+  ],
+  "usos_comunes": [
+    "Mostrar logotipos y gráficos de la aplicación.",
+    "Presentar imágenes de productos, avatares de usuario o fondos.",
+    "Integrar imágenes de la web o de la galería del usuario."
+  ],
+  "constructores_comunes": [
+    "Image.asset()",
+    "Image.network()",
+    "Image.file()",
+    "Image.memory()",
+    "Image() (usando directamente ImageProvider)"
+  ],
+  "widgets_relacionados": [
+    "FadeInImage (para imágenes que aparecen gradualmente)",
+    "CircleAvatar (para avatares circulares)",
+    "CachedNetworkImage (un paquete popular para el manejo avanzado de imágenes en red, incluyendo caché y placeholders)"
+  ],
+  "cuando_no_usar": "No uses `Image.network` si necesitas un control avanzado de caché para imágenes de red (considera usar un paquete como `cached_network_image`). Tampoco lo uses si necesitas una imagen con bordes especiales que el widget no pueda lograr por sí solo; en esos casos, `ClipRRect` o `Container` con `decoration` e `image` pueden ser más adecuados.",
+  "ejemplo_avanzado": "Container(\n  width: double.infinity,\n  height: 250,\n  margin: const EdgeInsets.all(16.0),\n  decoration: BoxDecoration(\n    borderRadius: BorderRadius.circular(15.0),\n    boxShadow: [\n      BoxShadow(\n        color: Colors.grey.withOpacity(0.5),\n        spreadRadius: 3,\n        blurRadius: 7,\n        offset: const Offset(0, 3),\n      ),\n    ],\n  ),\n  child: ClipRRect(\n    borderRadius: BorderRadius.circular(15.0),\n    child: Image.network(\n      'https://picsum.photos/800/600?random=1', \n      fit: BoxFit.cover,\n      loadingBuilder: (context, child, loadingProgress) {\n        if (loadingProgress == null) return child;\n        return Center(\n          child: CircularProgressIndicator(\n            valueColor: const AlwaysStoppedAnimation<Color>(Colors.blueAccent),\n            strokeWidth: 4.0,\n            value: loadingProgress.expectedTotalBytes != null\n                ? loadingProgress.cumulativeBytesLoaded / loadingProgress.expectedTotalBytes!\n                : null,\n          ),\n        );\n      },\n      errorBuilder: (context, error, stackTrace) {\n        return Container(\n          color: Colors.red.shade100,\n          alignment: Alignment.center,\n          child: Column(\n            mainAxisAlignment: MainAxisAlignment.center,\n            children: const [\n              Icon(Icons.image_not_supported, size: 60, color: Colors.red),\n              SizedBox(height: 10),\n              Text('Error al cargar imagen', style: TextStyle(color: Colors.red)),\n            ],\n          ),\n        );\n      },\n    ),\n  ),\n);",
+  "imagen": "assets/Image.jpg",
+  "ruta": "/Page_Image"
+}
 ]

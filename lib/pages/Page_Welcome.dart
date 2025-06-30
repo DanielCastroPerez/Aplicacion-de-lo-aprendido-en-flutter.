@@ -11,11 +11,11 @@ class Page_Welcome extends StatefulWidget {
 }
 
 class _Page_WelcomeState extends State<Page_Welcome> {
-  List<dynamic> widgetsData = [];//
+  List<dynamic> widgetsData = [];
 
   Future<void> cargarWidgetsDesdeJson() async {
-    final String response = await rootBundle.loadString('assets/data/widgets_avanzado.json');// 
-    final data = await json.decode(response);// Utilidades de Plataforma / Servicios
+    final String response = await rootBundle.loadString('assets/data/widgets_avanzado.json');// rootBundle.loadString sifnifica 
+    final data = await json.decode(response);
     setState(() {
       widgetsData = data;
     });
@@ -58,28 +58,37 @@ class _Page_WelcomeState extends State<Page_Welcome> {
 
               SizedBox(height: 20.0),
               
-              ...widgetsData.map((widgetData) {
-                return Card(
-                  shape: RoundedRectangleBorder(// RoundedRectangleBorder sirve para darle un borde a la card
-                    borderRadius: BorderRadius.circular(8.0),
-                  ),
-                  elevation: 5.0,
-                  child: Container(
-                    padding: EdgeInsets.all(16.0),
-                    child: Center(
-                      child: Text(
-                        widgetData['nombre'],
-                        style: GoogleFonts.poppins(
-                          textStyle: TextStyle(
-                            fontSize: 20.0,
-                            color: Colors.black,
+              ...widgetsData.map((widget_data) {
+                return GestureDetector(
+                  onTap: () {
+                    final ruta = widget_data['ruta'];
+                    print('Ruta: $ruta');
+                    if (ruta != null && ruta.isNotEmpty) {
+                      Navigator.pushNamed(context, ruta,arguments: widget_data);
+                    }
+                  },
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
+                    elevation: 5.0,
+                    child: Container(
+                      padding: EdgeInsets.all(16.0),
+                      child: Center(
+                        child: Text(
+                          widget_data['nombre'],
+                          style: GoogleFonts.poppins(
+                            textStyle: TextStyle(
+                              fontSize: 20.0,
+                              color: Colors.black,
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 );
-              }),
+              }).toList(),
             ],
           ),
         ),
