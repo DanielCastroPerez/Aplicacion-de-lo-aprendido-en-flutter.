@@ -23,7 +23,7 @@ class Page_Container extends StatelessWidget {
               //CONTEINER DE IMAGEN
               alignment: Alignment.center, // centro la imagen
               margin: EdgeInsets.only(bottom: 20.0),
-              child: Image.asset("assets/colum.jpg", fit: BoxFit.fill),
+              child: Image.asset("assets/Container.jpg", fit: BoxFit.fill),
             ),
 
             Container(

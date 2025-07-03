@@ -6,7 +6,6 @@ class Page_AppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final widgetData = ModalRoute.of(context)!.settings.arguments as Map;
-    final title_widget = widgetData['AppBar'];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -22,7 +21,7 @@ class Page_AppBar extends StatelessWidget {
           children: [
             Container(
               padding: EdgeInsets.only(bottom: 20.0),
-              child: Image.asset("assets/AppBar.jpg", fit: BoxFit.fill),
+              child: Image.asset(widgetData["imagen"], fit: BoxFit.fill),
             ),
             Container(
               //Conteiner explicacion
@@ -33,20 +32,7 @@ class Page_AppBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(8.0),
               ),
 
-              child: Text(
-                """
-                Barra de aplicación superior que puede mostrar título, íconos, acciones, etc. 
-                La barra de aplicación se utiliza para proporcionar información adicional sobre la aplicación y para permitir al usuario interactuar con ella. 
-                Puede ser utilizada para mostrar el título de la aplicación, los íconos de la aplicación, las acciones que se pueden realizar en la aplicación, 
-                
-                la información de la aplicación y los detalles de la aplicación. 
-                También se utiliza para permitir al usuario interactuar con la 
-                aplicación, como iniciar sesión, cerrar sesión, cambiar la configuración de la aplicación, etc. 
-                La barra de aplicación se utiliza en aplicaciones móviles, web y escritorio. 
-                En aplicaciones móviles, la barra de aplicación se utiliza para proporcionar información adicional sobre la aplicación y para permitir al usuario interactuar con ella. 
-                En aplicaciones web, la barra de aplicación se utiliza para proporcionar información adicional sobre la aplicación y para permitir al usuario interactuar con ella. 
-                En aplicaciones escritorio, la barra de aplicación se utiliza
-""",
+              child: Text(widgetData["descripcion"],
                 textAlign: TextAlign.justify,
                 style: TextStyle(fontSize: 20.0),
               ),

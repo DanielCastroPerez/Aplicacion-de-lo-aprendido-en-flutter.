@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:practida_daniel/pages/Page_AppBar.dart';
+import 'package:practida_daniel/pages/Page_MaterialApp.dart';
 import 'package:practida_daniel/pages/Page_Welcome.dart';
 import 'package:practida_daniel/pages/Page_Scaffold.dart';
 import 'package:practida_daniel/pages/Page_Container.dart';
@@ -21,6 +22,7 @@ class MyApp extends StatelessWidget {
         "/Page_Scaffold":(BuildContext context)=>Page_Scaffold(),
         "/Page_Container":(BuildContext context)=>Page_Container(),
         "/Page_AppBar":(BuildContext context)=>Page_AppBar(),
+        "/Page_MaterialApp":(BuildContext context)=>Page_MaterialApp(),
       },
     );
   }
