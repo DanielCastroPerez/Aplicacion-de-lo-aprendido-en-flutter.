@@ -623,117 +623,226 @@
   },
   {
     "nombre": "Padding",
-    "descripcion": "Un widget que inserta espacio vacío alrededor de su `child` (hijo). Es una forma directa y eficiente de añadir 'relleno interno' a cualquier widget, empujando el contenido hacia adentro desde los bordes definidos. Es la forma preferida de aplicar padding si solo necesitas esa funcionalidad específica, sin las características adicionales de un `Container`.",
+    "descripcion": "Un widget fundamental en Flutter que inserta espacio vacío alrededor de su 'child' (hijo). Permite controlar el espaciado interno de un widget, empujando su contenido lejos de sus bordes.",
     "propiedades_detalladas": [
       {
         "nombre": "padding",
         "tipo": "EdgeInsetsGeometry",
-        "descripcion_extendida": "El único y crucial parámetro de este widget. Define el tamaño del espacio vacío que se insertará alrededor de su `child`. Este valor es de tipo `EdgeInsets`, que te permite especificar el espaciado en los cuatro lados (izquierda, arriba, derecha, abajo) o de forma simétrica. Los constructores de `EdgeInsets` más comunes son:\n    - **`EdgeInsets.all(double value)`**: Aplica el mismo padding a todos los lados.\n    - **`EdgeInsets.only({left, top, right, bottom})`**: Permite especificar padding solo en lados específicos.\n    - **`EdgeInsets.symmetric({vertical, horizontal})`**: Aplica padding igual a los lados verticales (arriba y abajo) o a los horizontales (izquierda y derecha).\n    - **`EdgeInsets.zero`**: Sin padding (0 en todos los lados).",
-        "ejemplo_propiedad_basico": "padding: const EdgeInsets.all(8.0)",
-        "ejemplo_propiedad_avanzado": "padding: const EdgeInsets.only(top: 16.0, left: 10.0, right: 10.0),"
+        "descripcion_extendida": "Define la cantidad de espacio vacío que se debe aplicar alrededor del 'child'. Puedes especificar un valor uniforme, solo para ciertos lados, o para lados horizontales/verticales.",
+        "ejemplo_propiedad": "Padding(\n  padding: const EdgeInsets.all(16.0), // Padding uniforme de 16px\n  child: Text('Con padding de 16'),\n)\n\nPadding(\n  padding: const EdgeInsets.only(left: 8.0, top: 4.0), // Padding solo a la izquierda y arriba\n  child: Text('Con padding específico'),\n)\n\nPadding(\n  padding: const EdgeInsets.symmetric(horizontal: 20.0), // Padding horizontal\n  child: Text('Con padding horizontal'),\n)"
       },
       {
         "nombre": "child",
         "tipo": "Widget",
-        "descripcion_extendida": "El widget al que se aplicará el padding. Este widget se renderizará dentro del área definida por el `Padding` y su relleno. Si no se especifica un `child`, el `Padding` simplemente creará un espacio vacío con las dimensiones de su padding.",
-        "ejemplo_propiedad_basico": "child: const Text('Hola')",
-        "ejemplo_propiedad_avanzado": "child: ElevatedButton(onPressed: () {}, child: const Text('Botón con Padding'))"
+        "descripcion_extendida": "El widget al que se le aplicará el padding. El espacio definido por `padding` se agregará alrededor de este widget.",
+        "ejemplo_propiedad": "Padding(\n  padding: const EdgeInsets.all(8.0),\n  child: Container(\n    color: Colors.blue,\n    width: 100,\n    height: 100,\n  ),\n)"
       }
     ],
     "usos_comunes": [
-      "Añadir espacio alrededor de botones, iconos o textos para mejorar la legibilidad y la estética.",
-      "Crear separación entre elementos dentro de un `Column` o `Row`.",
-      "Asegurar que el contenido no se pegue a los bordes de la pantalla o de otros contenedores.",
-      "Aplicar un relleno consistente a múltiples widgets dentro de una lista o cuadrícula."
+      "Crear espacio entre widgets en un `Column`, `Row` o `Stack`.",
+      "Ajustar la separación de un widget respecto a los bordes de la pantalla o de su contenedor padre.",
+      "Mejorar la legibilidad y la estética de la interfaz de usuario."
     ],
     "constructores_comunes": [
-      "Padding()"
+      "Padding({Key? key, required EdgeInsetsGeometry padding, Widget? child})"
     ],
     "widgets_relacionados": [
-      "Container (también tiene una propiedad `padding`, pero ofrece más opciones de estilo)",
-      "SizedBox (para crear espacios vacíos con dimensiones fijas)",
-      "Spacer (para crear espacio flexible en `Row` o `Column`)"
+      "SizedBox",
+      "Container",
+      "Margin (aunque `Container` con `margin` es el equivalente común)"
     ],
-    "cuando_no_usar": "No uses el widget `Padding` si:\n- Ya estás usando un `Container` y solo necesitas padding; en ese caso, usa la propiedad `padding` del `Container` directamente.\n- Necesitas añadir un margen externo (espacio *alrededor* del widget), para eso usarías la propiedad `margin` de un `Container` o el widget `SizedBox` para envolverlo.\n- Necesitas un espacio flexible que se adapte al espacio restante; para eso, usa `Spacer` dentro de `Row` o `Column`.",
-    "codigo": "Padding(\n  padding: const EdgeInsets.all(20.0), // Aplica 20 píxeles de padding en todos los lados\n  child: Container(\n    color: Colors.blue.shade100,\n    child: const Text(\n      'Este texto tiene un padding de 20px.',\n      style: TextStyle(fontSize: 18),\n      textAlign: TextAlign.center,\n    ),\n  ),\n);"
+    "cuando_no_usar": "No uses `Padding` si el espaciado es parte inherente del diseño de un widget personalizado (donde podrías dibujar el padding directamente). Para espaciados simples entre elementos en un `Row` o `Column`, a veces `SizedBox` con `width` o `height` puede ser una alternativa más explícita.",
+    "codigo": "Padding(\n  padding: const EdgeInsets.all(12.0),\n  child: Text(\n    'Este texto tiene padding por todos lados.',\n    style: TextStyle(fontSize: 18),\n  ),\n);",
+    "imagen": "assets/Padding.jpg",
+    "ruta": "/Page_Padding"
   },
   {
     "nombre": "ListTile",
-    "descripcion": "Un widget de Material Design que es ideal para crear filas en listas, como las que se encuentran en menús, configuraciones o feeds de noticias. Proporciona una estructura predefinida para organizar un `leading` (icono o avatar), un `title` (texto principal), un `subtitle` (texto secundario) y un `trailing` (icono o widget al final), facilitando la implementación de elementos de lista con una apariencia coherente.",
+    "descripcion": "Un widget de Material Design que organiza de forma conveniente hasta tres líneas de texto y opcionalmente iconos iniciales y finales. Es ideal para elementos en listas, menús de navegación o cualquier lugar donde se necesite una fila de información estructurada.",
     "propiedades_detalladas": [
       {
         "nombre": "leading",
         "tipo": "Widget",
-        "descripcion_extendida": "Un widget opcional que se muestra al principio del `ListTile` (típicamente a la izquierda). Se usa comúnmente para mostrar un `Icon`, `CircleAvatar` o una `Checkbox`/`Radio`.",
-        "ejemplo_propiedad_basico": "leading: Icon(Icons.person)",
-        "ejemplo_propiedad_avanzado": "leading: CircleAvatar(\n  backgroundImage: NetworkImage('https://picsum.photos/50/50?random=1'),\n)"
+        "descripcion_extendida": "Un widget que se muestra antes del título y subtítulo. Comúnmente se usa para un `Icon`, `CircleAvatar` o `Image`.",
+        "ejemplo_propiedad": "ListTile(\n  leading: Icon(Icons.person),\n  title: Text('Nombre de Usuario'),\n)"
       },
       {
         "nombre": "title",
         "tipo": "Widget",
-        "descripcion_extendida": "El widget principal que se muestra en el `ListTile`, generalmente un `Text` widget. Representa la información central del elemento de la lista.",
-        "ejemplo_propiedad_basico": "title: Text('Nombre de Usuario')",
-        "ejemplo_propiedad_avanzado": "title: Text(\n  'Producto Destacado',\n  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),\n)"
+        "descripcion_extendida": "El texto principal de la lista. Generalmente es un `Text` widget que muestra el nombre del elemento o una descripción principal.",
+        "ejemplo_propiedad": "ListTile(\n  title: Text('Configuración de la Cuenta'),\n)"
       },
       {
         "nombre": "subtitle",
         "tipo": "Widget",
-        "descripcion_extendida": "Un widget opcional que se muestra debajo del `title`. Generalmente es un `Text` más pequeño que proporciona información adicional o secundaria sobre el elemento.",
-        "ejemplo_propiedad_basico": "subtitle: Text('Última conexión: hace 5 min')",
-        "ejemplo_propiedad_avanzado": "subtitle: Text(\n  'Descripción breve del producto que puede ocupar varias líneas.',\n  maxLines: 2, \n  overflow: TextOverflow.ellipsis,\n)"
+        "descripcion_extendida": "Texto secundario que se muestra debajo del título. Proporciona información adicional o un contexto más detallado para el elemento de la lista.",
+        "ejemplo_propiedad": "ListTile(\n  title: Text('Notificaciones'),\n  subtitle: Text('Activar/Desactivar alertas'),\n)"
       },
       {
         "nombre": "trailing",
         "tipo": "Widget",
-        "descripcion_extendida": "Un widget opcional que se muestra al final del `ListTile` (típicamente a la derecha). Se usa comúnmente para un `Icon` (como una flecha de navegación `Icons.arrow_forward_ios`), un `Switch`, o un `IconButton` para una acción rápida.",
-        "ejemplo_propiedad_basico": "trailing: Icon(Icons.arrow_forward_ios)",
-        "ejemplo_propiedad_avanzado": "trailing: Switch(\n  value: _isSwitchedOn,\n  onChanged: (bool value) {\n    // Lógica para cambiar el estado\n  },\n)"
+        "descripcion_extendida": "Un widget que se muestra al final de la lista, después del título y subtítulo. Se usa a menudo para iconos de flecha (`Icons.chevron_right`), `Switch` widgets o `Checkbox`.",
+        "ejemplo_propiedad": "ListTile(\n  title: Text('Modo Oscuro'),\n  trailing: Switch(value: true, onChanged: (bool val) {}),\n)"
       },
       {
         "nombre": "onTap",
-        "tipo": "VoidCallback",
-        "descripcion_extendida": "Una función de callback que se invoca cuando el usuario toca el `ListTile`. Esto lo hace interactivo y es donde usualmente defines la navegación a otra pantalla o una acción específica.",
-        "ejemplo_propiedad_basico": "onTap: () { print('ListTile tocado!'); }",
-        "ejemplo_propiedad_avanzado": "onTap: () {\n  Navigator.of(context).push(MaterialPageRoute(builder: (context) => const DetailScreen()));\n}"
-      },
-      {
-        "nombre": "selected",
-        "tipo": "bool",
-        "descripcion_extendida": "Si es `true`, el `ListTile` se dibujará con el color de selección del tema, indicando que está actualmente seleccionado. Útil para resaltar el elemento activo en una lista de opciones.",
-        "ejemplo_propiedad_basico": "selected: true",
-        "ejemplo_propiedad_avanzado": "selected: _selectedIndex == index, // Basado en un estado de selección\nselectedTileColor: Colors.blue.shade50, // Color de fondo cuando seleccionado\nselectedColor: Colors.blueAccent, // Color de iconos y texto cuando seleccionado"
+        "tipo": "GestureTapCallback",
+        "descripcion_extendida": "Una función de callback que se invoca cuando el usuario toca el `ListTile`. Ideal para manejar la navegación o acciones al seleccionar un elemento.",
+        "ejemplo_propiedad": "ListTile(\n  title: Text('Ver Detalles'),\n  onTap: () {\n    print('ListTile presionado');\n    // Navigator.push(context, MaterialPageRoute(builder: (context) => DetailScreen()));\n  },\n)"
       },
       {
         "nombre": "dense",
         "tipo": "bool",
-        "descripcion_extendida": "Si es `true`, el `ListTile` será más compacto, reduciendo su altura vertical y el espaciado interno. Útil para listas donde se necesita mostrar más elementos en menos espacio.",
-        "ejemplo_propiedad_basico": "dense: true",
-        "ejemplo_propiedad_avanzado": "dense: true, // Hace el ListTile más pequeño\nleading: Icon(Icons.short_text, size: 20), // Ícono más pequeño para concordar"
+        "descripcion_extendida": "Si es `true`, el `ListTile` será más compacto, reduciendo el espacio vertical ocupado. Útil para listas con muchos elementos.",
+        "ejemplo_propiedad": "ListTile(\n  dense: true,\n  title: Text('Elemento Compacto'),\n)"
       },
       {
-        "nombre": "tileColor",
-        "tipo": "Color",
-        "descripcion_extendida": "El color de fondo del `ListTile`. Por defecto, el `ListTile` tiene un fondo transparente, heredando el color del padre.",
-        "ejemplo_propiedad_basico": "tileColor: Colors.lightBlue.shade50",
-        "ejemplo_propiedad_avanzado": "tileColor: Colors.grey.shade100, // Un color de fondo claro para la fila\nshape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.0)), // Bordes redondeados"
+        "nombre": "selected",
+        "tipo": "bool",
+        "descripcion_extendida": "Si es `true`, el `ListTile` se dibujará con un color de fondo y de texto que indica que está seleccionado. Útil en listas de selección única o múltiple.",
+        "ejemplo_propiedad": "ListTile(\n  selected: true,\n  title: Text('Elemento Seleccionado'),\n  selectedTileColor: Colors.blue.withOpacity(0.1),\n)"
       }
     ],
     "usos_comunes": [
-      "Crear elementos de menú en un `Drawer`.",
-      "Mostrar elementos en una `ListView` o `Column` (ej. lista de contactos, configuraciones, resultados de búsqueda).",
-      "Funcionar como un elemento clicable en una interfaz de usuario donde se necesita una estructura de fila estándar."
+      "Elementos en `ListView` o `Column` para mostrar información estructurada.",
+      "Opciones en `Drawer` para navegación.",
+      "Configuraciones en pantallas de ajustes.",
+      "Listas de selección simple o múltiple."
     ],
     "constructores_comunes": [
       "ListTile()"
     ],
     "widgets_relacionados": [
-      "ListView (frecuentemente contiene ListTiles)",
-      "Card (ListTile es a menudo un hijo de Card para elementos de tarjeta)",
-      "Divider (para separar ListTiles visualmente)",
-      "SwitchListTile (un ListTile con un interruptor integrado)",
-      "CheckboxListTile (un ListTile con un checkbox integrado)"
+      "ListView",
+      "Card",
+      "Divider",
+      "CheckboxListTile",
+      "RadioListTile"
     ],
-    "cuando_no_usar": "No uses `ListTile` si necesitas un diseño de fila muy personalizado que se desvíe significativamente de su estructura predefinida. En esos casos, un `Row` con `Expanded` y `Padding` te daría más control. Tampoco lo uses para elementos que no necesitan ser parte de una 'lista' o que no requieren interacción directa (un `Row` simple podría ser más ligero).",
-    "codigo": "ListTile(\n  leading: const Icon(Icons.notifications, color: Colors.blueAccent),\n  title: const Text('Notificaciones'),\n  subtitle: const Text('Activar o desactivar notificaciones de la aplicación.'),\n  trailing: Switch(\n    value: true, // O tu variable de estado\n    onChanged: (bool newValue) {\n      // Lógica al cambiar el switch\n      print('Switch de notificaciones: $newValue');\n    },\n  ),\n  onTap: () {\n    print('ListTile de Notificaciones presionado');\n    // Aquí podrías navegar a la pantalla de configuración de notificaciones\n  },\n  tileColor: Colors.grey.shade100,\n  selected: true, // Si quieres que aparezca seleccionado por defecto o según lógica\n);"
-  }
+    "cuando_no_usar": "No uses `ListTile` si necesitas un diseño de fila muy personalizado que no se ajuste a la estructura predefinida de tres líneas de texto y dos iconos. Para esos casos, considera usar `Row` y `Column` directamente para tener un control total del layout.",
+    "codigo": "ListTile(\n  leading: Icon(Icons.star),\n  title: Text('Mi Elemento de Lista'),\n  subtitle: Text('Esta es una descripción secundaria.'),\n  trailing: Icon(Icons.arrow_forward_ios),\n  onTap: () {\n    print('ListTile presionado');\n  },\n);",
+    "imagen": "assets/ListTile.jpg",
+    "ruta": "/Page_ListTile"
+  },
+  {
+    "nombre": "GestureDetector",
+    "descripcion": "Un widget no visual que detecta gestos del usuario, como toques, arrastres o escalado, en el 'child' al que envuelve. Permite hacer que cualquier widget sea interactivo, incluso si no tiene propiedades de `onPressed` por defecto.",
+    "propiedades_detalladas": [
+      {
+        "nombre": "child",
+        "tipo": "Widget",
+        "descripcion_extendida": "El widget sobre el cual se detectarán los gestos. El `GestureDetector` no tiene una representación visual propia; solo se encarga de procesar las interacciones sobre su hijo.",
+        "ejemplo_propiedad": "GestureDetector(\n  child: Container(\n    color: Colors.red,\n    width: 50,\n    height: 50,\n  ),\n  onTap: () { print('Contenedor rojo tocado'); },\n)"
+      },
+      {
+        "nombre": "onTap",
+        "tipo": "GestureTapCallback",
+        "descripcion_extendida": "Callback que se invoca cuando el usuario toca el widget (un 'tap' simple). Es el gesto más común y útil para acciones de clic.",
+        "ejemplo_propiedad": "GestureDetector(\n  onTap: () {\n    print('Imagen tocada!');\n    // Abrir una nueva pantalla o mostrar un diálogo.\n  },\n  child: Image.asset('assets/my_image.png'),\n)"
+      },
+      {
+        "nombre": "onDoubleTap",
+        "tipo": "GestureTapCallback",
+        "descripcion_extendida": "Callback que se invoca cuando el usuario realiza un doble toque rápido en el widget.",
+        "ejemplo_propiedad": "GestureDetector(\n  onDoubleTap: () { print('Doble toque detectado!'); },\n  child: const Icon(Icons.favorite, size: 50),\n)"
+      },
+      {
+        "nombre": "onLongPress",
+        "tipo": "GestureLongPressCallback",
+        "descripcion_extendida": "Callback que se invoca cuando el usuario mantiene presionado el widget por un tiempo prolongado.",
+        "ejemplo_propiedad": "GestureDetector(\n  onLongPress: () { print('Presión prolongada!'); },\n  child: const Text('Mantén presionado'),\n)"
+      },
+      {
+        "nombre": "onPanUpdate",
+        "tipo": "GestureDragUpdateCallback",
+        "descripcion_extendida": "Callback que se invoca repetidamente mientras el usuario arrastra su dedo a través del widget, proporcionando detalles sobre el movimiento.",
+        "ejemplo_propiedad": "double _top = 0.0;\ndouble _left = 0.0;\n\n// ... dentro de un State\nGestureDetector(\n  onPanUpdate: (details) {\n    setState(() {\n      _top += details.delta.dy;\n      _left += details.delta.dx;\n    });\n  },\n  child: CustomPaint( // Un widget que puede reaccionar al movimiento\n    painter: MyPainter(_top, _left),\n  ),\n)"
+      },
+      {
+        "nombre": "onTapUp",
+        "tipo": "GestureTapUpCallback",
+        "descripcion_extendida": "Callback que se invoca cuando el usuario levanta su dedo después de un toque. Proporciona la posición exacta donde se levantó el dedo.",
+        "ejemplo_propiedad": "GestureDetector(\n  onTapUp: (details) { print('Dedo levantado en: ${details.localPosition}'); },\n  child: Container(width: 100, height: 100, color: Colors.green),\n)"
+      }
+    ],
+    "usos_comunes": [
+      "Hacer que widgets no interactivos (como `Image`, `Container`, `Text`) respondan a toques.",
+      "Implementar gestos complejos como arrastrar y soltar, escalar o rotar.",
+      "Detectar múltiples tipos de interacción en una sola área."
+    ],
+    "constructores_comunes": [
+      "GestureDetector({Key? key, Widget? child, GestureTapCallback? onTap, ...})"
+    ],
+    "widgets_relacionados": [
+      "InkWell",
+      "ElevatedButton",
+      "TextButton",
+      "RawGestureDetector"
+    ],
+    "cuando_no_usar": "Si un widget ya tiene una propiedad `onPressed` o similar (como `ElevatedButton`, `ListTile`), es preferible usar esa propiedad en lugar de envolverlo en un `GestureDetector` para un simple toque, ya que los widgets interactivos nativos de Material Design a menudo manejan efectos visuales (como ripples) automáticamente.",
+    "codigo": "GestureDetector(\n  onTap: () {\n    print('Widget tocado!');\n  },\n  onLongPress: () {\n    print('Widget mantenido presionado!');\n  },\n  child: Container(\n    padding: const EdgeInsets.all(20),\n    color: Colors.amber,\n    child: const Text(\n      'Toca o mantén presionado',\n      style: TextStyle(fontSize: 16),\n    ),\n  ),\n);",
+    "imagen": "assets/GestureDetector.jpg",
+    "ruta": "/Page_GestureDetector"
+  },
+  {
+    "nombre": "Navigator",
+    "descripcion": "Un widget que gestiona un historial de 'rutas' (páginas o pantallas) de una aplicación como una pila. Permite la navegación entre diferentes pantallas de la aplicación, empujando nuevas rutas a la pila o sacando las existentes.",
+    "propiedades_detalladas": [
+      {
+        "nombre": "initialRoute",
+        "tipo": "String",
+        "descripcion_extendida": "La ruta con nombre que se mostrará inicialmente cuando se inicia la aplicación. Debe coincidir con una de las claves en el mapa de `routes`.",
+        "ejemplo_propiedad": "MaterialApp(\n  initialRoute: '/',\n  routes: {\n    '/': (context) => HomeScreen(),\n    '/details': (context) => DetailScreen(),\n  },\n)"
+      },
+      {
+        "nombre": "routes",
+        "tipo": "Map<String, WidgetBuilder>",
+        "descripcion_extendida": "Un mapa que asocia nombres de cadena (rutas) con funciones que construyen los widgets de la pantalla correspondiente. Es la forma más común de definir rutas con nombre para una aplicación.",
+        "ejemplo_propiedad": "MaterialApp(\n  routes: {\n    '/': (context) => HomeScreen(),\n    '/profile': (context) => ProfileScreen(),\n    '/settings': (context) => SettingsScreen(),\n  },\n)"
+      },
+      {
+        "nombre": "pushNamed",
+        "tipo": "Future<T?> Function(BuildContext context, String routeName, {Object? arguments})",
+        "descripcion_extendida": "Empuja una nueva ruta con nombre a la pila del navegador. La nueva ruta se muestra en la parte superior de la pantalla. Permite pasar `arguments` opcionales a la ruta de destino.",
+        "ejemplo_propiedad": "ElevatedButton(\n  onPressed: () {\n    Navigator.pushNamed(\n      context,\n      '/details',\n      arguments: {'id': 42, 'name': 'Producto XYZ'},\n    );\n  },\n  child: const Text('Ir a Detalles'),\n)"
+      },
+      {
+        "nombre": "pop",
+        "tipo": "void Function(BuildContext context, [Object? result])",
+        "descripcion_extendida": "Saca la ruta actual de la pila del navegador, revelando la ruta anterior. Opcionalmente, puedes pasar un `result` de vuelta a la ruta que hizo el `push`.",
+        "ejemplo_propiedad": "// En la pantalla de detalles, para volver a la anterior\nElevatedButton(\n  onPressed: () {\n    Navigator.pop(context, 'Dato devuelto');\n  },\n  child: const Text('Volver'),\n)"
+      },
+      {
+        "nombre": "popAndPushNamed",
+        "tipo": "Future<T?> Function(BuildContext context, String routeName, {Object? arguments, T? result})",
+        "descripcion_extendida": "Saca la ruta actual de la pila y luego empuja una nueva ruta con nombre, reemplazando la ruta anterior en la pila. Útil para reemplazar la pantalla actual sin que la anterior permanezca en el historial.",
+        "ejemplo_propiedad": "ElevatedButton(\n  onPressed: () {\n    Navigator.popAndPushNamed(context, '/home');\n  },\n  child: const Text('Ir a Inicio y cerrar actual'),\n)"
+      },
+      {
+        "nombre": "pushReplacementNamed",
+        "tipo": "Future<T?> Function(BuildContext context, String routeName, {Object? arguments, T? result})",
+        "descripcion_extendida": "Reemplaza la ruta actual con una nueva ruta con nombre. La ruta actual se elimina de la pila y la nueva se coloca en su lugar. Es similar a `popAndPushNamed` en efecto.",
+        "ejemplo_propiedad": "ElevatedButton(\n  onPressed: () {\n    // Usar después de un login para que el usuario no pueda volver a la pantalla de login\n    Navigator.pushReplacementNamed(context, '/dashboard');\n  },\n  child: const Text('Login y entrar'),\n)"
+      }
+    ],
+    "usos_comunes": [
+      "Gestionar la navegación entre todas las pantallas de una aplicación Flutter.",
+      "Manejar el historial de navegación (pila de pantallas).",
+      "Pasar datos entre pantallas (con `arguments`).",
+      "Controlar el flujo de la aplicación (ej. después de un login, reemplazar la pantalla de login con la principal)."
+    ],
+    "constructores_comunes": [
+      "No se construye directamente, se accede a través de `Navigator.of(context)` o métodos estáticos como `Navigator.pushNamed()`."
+    ],
+    "widgets_relacionados": [
+      "MaterialApp (donde se configuran las rutas)",
+      "PageRoute (como MaterialPageRoute o CupertinoPageRoute)",
+      "ModalRoute (para acceder a los argumentos)",
+      "WillPopScope (para controlar el botón de retroceso del dispositivo)"
+    ],
+    "cuando_no_usar": "No es apropiado usar `Navigator` para cambios de UI pequeños dentro de una misma pantalla (ej. mostrar/ocultar un widget, cambiar un estado local). Para eso, usa `StatefulWidget` y `setState` o soluciones de gestión de estado como `Provider`, `Riverpod`, `Bloc`, etc.",
+    "codigo": "class MyApp extends StatelessWidget {\n  const MyApp({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return MaterialApp(\n      title: 'App con Navegación',\n      initialRoute: '/',\n      routes: {\n        '/': (context) => const HomeScreen(),\n        '/details': (context) => const DetailScreen(),\n        '/settings': (context) => const SettingsScreen(),\n      },\n      onGenerateRoute: (settings) {\n        // Un ejemplo avanzado para manejar rutas no definidas o con lógica compleja\n        if (settings.name == '/product') {\n          final args = settings.arguments as Map<String, dynamic>;\n          return MaterialPageRoute(builder: (context) => ProductScreen(productId: args['id']));\n        }\n        return null; // Dejar que el sistema maneje otras rutas\n      },\n    );\n  }\n}\n\n// Ejemplo de HomeScreen\nclass HomeScreen extends StatelessWidget {\n  const HomeScreen({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    return Scaffold(\n      appBar: AppBar(title: const Text('Inicio')),\n      body: Center(\n        child: Column(\n          mainAxisAlignment: MainAxisAlignment.center,\n          children: [\n            ElevatedButton(\n              onPressed: () {\n                Navigator.pushNamed(context, '/details',\n                    arguments: {'data': 'Información desde Home'});\n              },\n              child: const Text('Ir a Detalles'),\n            ),\n            ElevatedButton(\n              onPressed: () {\n                Navigator.pushNamed(context, '/settings');\n              },\n              child: const Text('Ir a Ajustes'),\n            ),\n          ],\n        ),\n      ),\n    );\n  }\n}\n\n// Ejemplo de DetailScreen\nclass DetailScreen extends StatelessWidget {\n  const DetailScreen({super.key});\n\n  @override\n  Widget build(BuildContext context) {\n    final Map<String, dynamic>? args = ModalRoute.of(context)!.settings.arguments as Map<String, dynamic>?;\n    final String receivedData = args?['data'] ?? 'Sin datos';\n\n    return Scaffold(\n      appBar: AppBar(title: const Text('Detalles')),\n      body: Center(\n        child: Column(\n          mainAxisAlignment: MainAxisAlignment.center,\n          children: [\n            Text('Datos recibidos: $receivedData'),\n            ElevatedButton(\n              onPressed: () {\n                Navigator.pop(context, 'Resultado desde Detalles');\n              },\n              child: const Text('Volver con resultado'),\n            ),\n          ],\n        ),\n      ),\n    );\n  }\n}\n",
+    "imagen": "assets/Navigator.jpg",
+    "ruta": "/Page_Navigator"
+}
 ]
